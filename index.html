@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <title>生成AIスタートダッシュ講座実践セッションメモ</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>生成AIスタートダッシュ講座実践：セッションメモ</h1>
+
+        <section>
+            <h2>本メモの使い方</h2>
+            <ul>
+                <li>本メモの内容を当日講師と一緒にご自身が利用しているテキスト生成AIに入力していただき、生成AIの活用を実践していきます。</li>
+                <li>本メモから、生成AIの入力画面にコピー＆ペーストする作業がありますので、PCでのご参加を推奨します。</li>
+                <li>各セッションでコピー＆ペーストする指示文は▽△で囲まれている文章です。</li>
+                <li>どの段階でどの入力が必要かが分かるように、順序を守って実行してください。不明点があれば、講師に質問しながら進めてください。</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>基本操作方法</h2>
+            <ul>
+                <li>PCで改行する場合、Shift＋Enterボタンで改行</li>
+                <li>テキストを選択して「Ctrl + C」（Macの場合「Command + C」）でコピー</li>
+                <li>コピーしたテキストを貼り付ける際は、カーソルを適切な場所に置いて「Ctrl + V」（Macの場合「Command + V」）でペースト</li>
+                <li>「Ctrl + Z」（Macの場合「Command + Z」）で直前の操作を取り消し</li>
+                <li>「Alt + Tab」（Macの場合「Command + Tab」）でウィンドウを切り替え</li>
+            </ul>
+            <p>■注意: 操作を間違えてもやり直せますので、落ち着いて進めていきましょう。</p>
+        </section>
+
+        <section>
+            <h2>要約・加工の実践</h2>
+            <p>プロンプト：</p>
+            <div class="copy-box">
+                <code id="prompt1">六法全書の主な内容を大まかに要約してください。箇条書きを使ってください。</code>
+                <button id="btn1" class="copy-btn" onclick="copyToClipboard('prompt1', 'btn1')">コピー</button>
+            </div>
+
+            <div class="copy-box">
+                <code id="prompt2">先ほど箇条書きにしたデータを表形式で表してください。</code>
+                <button id="btn2" class="copy-btn" onclick="copyToClipboard('prompt2', 'btn2')">コピー</button>
+            </div>
+            <p>■注意: 要約内容は網羅的かどうかを確認し、重要な点が漏れていないかチェックしてください。</p>
+        </section>
+
+        <section>
+            <h2>パワーポイント資料のアジェンダ作成</h2>
+            <p>プロンプト：</p>
+            <div class="copy-box">
+                <code id="prompt3">これからイベントの提案資料を作成します。相手は施設のオーナーです。イベントの目的は集客です。プレゼンのゴールはこの提案の魅力について伝え、了承を得ることです。このプレゼン資料のアジェンダを作成してください。</code>
+                <button id="btn3" class="copy-btn" onclick="copyToClipboard('prompt3', 'btn3')">コピー</button>
+            </div>
+
+            <div class="copy-box">
+                <code id="prompt4">このアジェンダに沿って、それぞれのページにおいてこちらが準備するべきと思われることを予想して提示してください。</code>
+                <button id="btn4" class="copy-btn" onclick="copyToClipboard('prompt4', 'btn4')">コピー</button>
+            </div>
+            <p>■注意: 一般的な提案にならないように、相手の状況に合わせた具体的な内容にすることを意識してください。</p>
+        </section>
+
+        <section>
+            <h2>EXCEL関数の作成</h2>
+            <p>プロンプト：</p>
+            <div class="copy-box">
+                <code id="prompt5">進捗管理表作成のため以下の列を含んだ内容を表形式で作成してください。表はこちらに直接記載してください。タスク名、担当者、開始日、完了予定日、実際の完了日、進捗状況、備考</code>
+                <button id="btn5" class="copy-btn" onclick="copyToClipboard('prompt5', 'btn5')">コピー</button>
+            </div>
+
+            <div class="copy-box">
+                <code id="prompt6">上記の表に以下の関数を実装してください。関数はテキスト形式でこちらに記載してください。また、タスク名をA1セルとして、適切なセルを設定してください。進捗状況：完了日に基づいて、タスクが遅延しているか進行中かを自動判定する関数進捗期間：営業日ベースのタスク進捗期間を計算する関数</code>
+                <button id="btn6" class="copy-btn" onclick="copyToClipboard('prompt6', 'btn6')">コピー</button>
+            </div>
+            <p>■注意: 関数の結果に誤りがないか、セルの指定が適切か確認することが重要です。</p>
+        </section>
+
+        <section>
+            <h2>メール作成と送信前の確認</h2>
+            <p>プロンプト：</p>
+            <div class="copy-box">
+                <code id="prompt7" style="white-space: pre-wrap;">あなたは、購読者に共感を呼び起こし、興味を引き続ける質の高いメルマガを作成するプロのライターです。
+このメルマガは読者が次のステップを自然に踏み出したくなるように誘導するものです。以下の点を考慮してメルマガを作成してください。
+
+ターゲットオーディエンス: 生成ＡＩに興味がある一方で手が出せていない人です。
+目的: 　興味を持って講座に申し込んでもらうこと、講座を通じて変われると期待感を持ってもらうことです。
+トーンとスタイル: 　読者層に合わせた親しみやすく、信頼を感じさせるトーンを使用してください。フレンドリーでありながらプロフェッショナルなバランスを取りましょう。
+フック: 　- イントロダクションに強いフックを使用し、読者の興味を引きつけるエピソードや問題提起から始めてください。その上で、読者の抱える課題に共感し、解決策を提供する形に持っていきます。
+パーソナライゼーション: 　- できるだけ購読者の名前を入れるなど、個別化を取り入れてください。さらに、読者の痛みを理解し、それに対する具体的な価値を提供することを示してください。
+構成: 　- 序章: 読者の問題や興味に共感を示す。 　- 本文: 問題の解決策を提示し、関連する情報やエピソードを共有。 　- CTA (Call to Action): 明確で自然に次のアクションに移れるようなCTAを設定してください。
+感情的な訴求: 　- 読者が持つ希望、悩み、不安などに訴えかける文章を用い、感情的に心に響く内容にしてください。人間らしい温かさや思いやりを表現してください。
+言葉の選び方: 　- シンプルでわかりやすい言葉を使いながらも、読者の関心を引くために少し具体的でインパクトのある表現を選んでください。
+例文: 　- あなたがプロンプトに応じて作成するメルマガのテーマは生成AIを使いこなすことの重要性と解決策（講座に申し込む）です。
+購読者にとっての価値や、そのテーマに関連するストーリーを取り入れたメルマガを作成してください。
+CTAの提案: 　- メルマガの終わりに、読者が次に取るべき行動を明示します。「○○についてもっと知りたい方は、こちらからお問い合わせください。」などの具体的な行動を提案してください。
+購読者に強い感情的な共感を与え、彼らが次の行動を取りたいと思うような、魅力的で効果的なメルマガを作成してください。</code>
+                <button id="btn7" class="copy-btn" onclick="copyToClipboard('prompt7', 'btn7')">コピー</button>
+            </div>
+
+            <div class="copy-box">
+                <code id="prompt8" style="white-space: pre-wrap;">以下のメール文章を確認し、不自然な表現や改善が必要な点をリストアップした上で、それぞれに対する修正案を提案してください。
+特に、文法ミス、敬語の誤用、トーンの不適切さ、冗長な表現、重要な情報の欠落などに注意してください。
+また、読み手にとっての明確さ、簡潔さ、礼儀正しさを意識した修正を行ってください。
+その後、メールに含まれるべき内容に関するリマインドとして、以下の点にも注意するようにリストアップしてください。
+・宛名や会社名の正確さ
+・添付ファイルの有無
+・適切な件名
+・署名の有無
+
+メール文章: 
+[★ここにメール文章を貼り付けてください★]　※ここは加工が必要です。</code>
+                <button id="btn8" class="copy-btn" onclick="copyToClipboard('prompt8', 'btn8')">コピー</button>
+            </div>
+            <p>■注意: メールの内容をしっかり確認し、必要な修正ができるようにしましょう。</p>
+        </section>
+
+        <section>
+            <h2>アイデアの壁打ち</h2>
+            <p>プロンプト：</p>
+            <div class="copy-box">
+                <code id="prompt9">起業家になりたいのですが、どのような準備をすれば良いでしょうか？</code>
+                <button id="btn9" class="copy-btn" onclick="copyToClipboard('prompt9', 'btn9')">コピー</button>
+            </div>
+
+            <div class="copy-box">
+                <code id="prompt10">1. 自己分析と目標設定について、より詳細なステップを教えてください。</code>
+                <button id="btn10" class="copy-btn" onclick="copyToClipboard('prompt10', 'btn10')">コピー</button>
+            </div>
+            <p>■注意: 返答を鵜呑みにせず、自分に合ったアクションプランを立てるようにしてください。</p>
+        </section>
+
+        <section>
+            <h2>不具合の調査</h2>
+            <p>プロンプト：</p>
+            <div class="copy-box">
+                <code id="prompt11">Excelのシートをコピーする時に「名前は既に存在します」と出たのですが何が原因ですか？解決方法はありますか。</code>
+                <button id="btn11" class="copy-btn" onclick="copyToClipboard('prompt11', 'btn11')">コピー</button>
+            </div>
+
+            <div class="copy-box">
+                <code id="prompt12">上記の方法を試しましたが解消しません。他に考えられる対策はありますか。</code>
+                <button id="btn12" class="copy-btn" onclick="copyToClipboard('prompt12', 'btn12')">コピー</button>
+            </div>
+            <p>■注意: 解決策が見つからない場合、細かな情報も伝えて追加で質問するようにしてください。</p>
+        </section>
+
+    </div>
+</body>
+
+</html>

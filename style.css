@@ -39,30 +39,34 @@ h2 {
 }
 
 ul {
-    list-style: disc inside;
+    list-style-position: inside;
     margin-bottom: 20px;
 }
 
 ul li {
-    margin: 5px 0;
+    margin-bottom: 10px; /* 行間のスペースを調整 */
+    text-indent: -1.5em; /* インデントを調整 */
+    padding-left: 1.5em; /* リスト項目の左余白を調整 */
 }
 
 .copy-box {
     display: flex;
-    align-items: center;
+    justify-content: space-between; /* テキストとボタンの間にスペースを設定 */
+    align-items: center; /* ボタンとテキストを垂直方向に中央揃え */
     margin: 10px 0;
     padding: 10px;
-    background-color: #f0f0f0;
+    background-color: #dddddd;
     border-left: 4px solid #007bff;
     border-radius: 5px;
 }
 
 code {
     font-family: Consolas, "Courier New", monospace;
-    background-color: #e6e6e6;
+    background-color: #f9f9f9;
     padding: 8px;
     border-radius: 5px;
-    flex-grow: 1;
+    flex-grow: 1; /* テキストエリアをボタンと同じ行に広げる */
+    margin-right: 10px; /* ボタンとの間にスペースを作る */
     word-wrap: break-word;
 }
 
@@ -73,8 +77,8 @@ button.copy-btn {
     padding: 8px 12px;
     cursor: pointer;
     border-radius: 5px;
-    margin-left: 10px;
     transition: background-color 0.3s ease;
+    white-space: nowrap; /* ボタン内のテキストを1行に固定 */
 }
 
 button.copy-btn:hover {
@@ -92,7 +96,7 @@ button.copy-btn:hover {
     }
 
     .copy-box {
-        flex-direction: column;
+        flex-direction: column-reverse;
     }
 
     button.copy-btn {

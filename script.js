@@ -11,8 +11,9 @@ function copyToClipboard(id, btnId) {
         // After 1 second, change the button text back to "コピー"
         setTimeout(() => {
             button.innerHTML = 'コピー';
-        }, 1000);
+        }, 2000);
     }).catch(err => {
+        button.innerHTML = 'コピー失敗';
         console.error('Copy failed', err);
     });
 }

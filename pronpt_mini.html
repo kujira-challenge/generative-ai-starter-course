@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="ja">
 
 <head>
@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
-  <title>生成AI実践セッション：新テーマコンテンツ</title>
+  <title>生成AI実演セッション</title>
 </head>
 
 <body>
@@ -18,7 +18,21 @@
       </a>
     </div>
 
-    <h1>生成AI実践セッション：新テーマコンテンツ</h1>
+    <h1>生成AI実演セッション</h1>
+
+    <!-- 本Webページの使い方 -->
+    <section>
+      <h2>本Webページの使い方</h2>
+      <p>本Webページは「生成AIってなに？ 〜未来の便利ツールを活用しよう！〜」の実演セッションで使用する補助ツールです。</p>
+      <ul>
+        <li>以下の内容を講師と一緒にご自身が利用しているテキスト生成AIに入力していただき、生成AIの活用を実践していきます。</li>
+        <li>生成AIの入力画面にコピー＆ペーストをしていただきます。このページからコピーの際は指示文（プロンプト）の隣のコピーボタンを押してください。</li>
+        <li>上から順番に進めていきます。基本的には１つのテーマにつき２つの指示文（プロンプト）があり、１つ目を実行したあとに続けて２つ目を実行します。</li>
+        <li>不明点があれば、お気軽に質問しながら進めてください。</li>
+        <li>このページは本講座専用に作成したものです。個人利用にとどめていただき、SNSや知人への拡散はご遠慮ください。</li>
+      </ul>
+      <p><strong>■注意:</strong> 操作を間違えてもやり直せますので、落ち着いて進めていきましょう。</p>
+    </section>
 
     <!-- 時短レシピ提案 -->
     <section>
@@ -40,22 +54,22 @@
       </div>
     </section>
 
-    <!-- 家族で楽しむお出かけプラン -->
-    <section>
-      <h2>家族で楽しむお出かけプラン</h2>
-      <p>プロンプト：</p>
-      <div class="copy-box">
-        <code id="prompt3">週末に八王子市周辺で家族で楽しめるお出かけプランを提案して</code>
-        <button id="btn3" class="copy-btn" onclick="copyToClipboard('prompt3', 'btn3')">コピー</button>
-      </div>
-    </section>
-
     <!-- 3歳児向け 空が青い理由の説明 -->
     <section>
       <h2>3歳児向け 空が青い理由の説明</h2>
       <p>プロンプト：</p>
       <div class="copy-box">
-        <code id="prompt4">空が青い理由を3歳児がわかるように説明して</code>
+        <code id="prompt3">空が青い理由を3歳児がわかるように説明して</code>
+        <button id="btn3" class="copy-btn" onclick="copyToClipboard('prompt3', 'btn3')">コピー</button>
+      </div>
+    </section>
+
+    <!-- 日付の変換 -->
+    <section>
+      <h2>日付の箇条書き変換</h2>
+      <p>プロンプト：</p>
+      <div class="copy-box">
+        <code id="prompt4">以下の日付一覧を日付を次の形の箇条書きに直してください。年は2025年です。□元の日付：3/16記念日１,5/3記念日２,11/18記念日３　□変換する例：＊3/15(土)：生成AIセミナー</code>
         <button id="btn4" class="copy-btn" onclick="copyToClipboard('prompt4', 'btn4')">コピー</button>
       </div>
     </section>

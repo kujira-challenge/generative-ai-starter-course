@@ -1,81 +1,61 @@
-
 <html lang="ja">
-
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
-  <title>生成AI実演セッション</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生成AI 実演プロンプト集</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    .container { max-width: 800px; margin: 0 auto; }
+    h1 { text-align: center; }
+    section { margin-bottom: 30px; }
+    .copy-box { display: flex; align-items: center; margin-top: 8px; }
+    code { background: #f5f5f5; padding: 8px; border-radius: 4px; flex: 1; }
+    button { margin-left: 10px; padding: 8px 12px; }
+    a.chatgpt { display: block; text-align: center; margin-bottom: 20px; font-size: 1.2rem; }
+  </style>
+  <script>
+    function copyToClipboard(id) {
+      var code = document.getElementById(id);
+      navigator.clipboard.writeText(code.textContent).then(function() {
+        alert('プロンプトをコピーしました');
+      });
+    }
+  </script>
 </head>
-
 <body>
   <div class="container">
-    <!-- ChatGPTへのアクセスリンクを最上部に配置 -->
-    <div class="chatgpt-access" style="text-align: center; margin-bottom: 20px; padding: 10px; background-color: #e0f7fa; border: 2px solid #007bff; border-radius: 5px;">
-      <a href="https://chat.openai.com" target="_blank" style="font-size: 1.25rem; color: #007bff; text-decoration: none;">
-        ChatGPTでプロンプトを試してみる
-      </a>
-    </div>
+    <a href="https://chat.openai.com" class="chatgpt" target="_blank">ChatGPT で今すぐ試す</a>
+    <h1>ライブ実演プロンプト集</h1>
 
-    <h1>生成AI実演セッション</h1>
-
-    <!-- 本Webページの使い方 -->
     <section>
-      <h2>本Webページの使い方</h2>
-      <p>本Webページは「生成AIってなに？ 〜未来の便利ツールを活用しよう！〜」の実演セッションで使用する補助ツールです。</p>
-      <ul>
-        <li>以下の内容を講師と一緒にご自身が利用しているテキスト生成AIに入力していただき、生成AIの活用を実践していきます。</li>
-        <li>生成AIの入力画面にコピー＆ペーストをしていただきます。このページからコピーの際は指示文（プロンプト）の隣のコピーボタンを押してください。</li>
-        <li>上から順番に進めていきます。基本的には１つのテーマにつき２つの指示文（プロンプト）があり、１つ目を実行したあとに続けて２つ目を実行します。</li>
-        <li>不明点があれば、お気軽に質問しながら進めてください。</li>
-        <li>このページは本講座専用に作成したものです。個人利用にとどめていただき、SNSや知人への拡散はご遠慮ください。</li>
-      </ul>
-      <p><strong>■注意:</strong> 操作を間違えてもやり直せますので、落ち着いて進めていきましょう。</p>
-    </section>
-
-    <!-- 時短レシピ提案 -->
-    <section>
-      <h2>時短レシピ提案</h2>
+      <h2>Demo A：急な欠勤 LINE</h2>
       <p>プロンプト：</p>
       <div class="copy-box">
-        <code id="prompt1">業務スーパーの冷凍野菜を使って電子レンジで作れる時短レシピを提案して</code>
-        <button id="btn1" class="copy-btn" onclick="copyToClipboard('prompt1', 'btn1')">コピー</button>
+        <code id="prompt1">明朝9時、体調不良で休む。引継ぎは田中さん。上司に敬語LINE100字以内で</code>
+        <button onclick="copyToClipboard('prompt1')">コピー</button>
       </div>
+      <p>※上司への連絡に必要な要点を含み、適切な敬語を自動生成します。</p>
     </section>
 
-    <!-- お礼メール例文 -->
     <section>
-      <h2>お礼メール例文</h2>
+      <h2>Demo B：4歳向けおはなし</h2>
       <p>プロンプト：</p>
       <div class="copy-box">
-        <code id="prompt2">今日訪問した付き合いが長い取引先へのお礼メールの例文を考えて</code>
-        <button id="btn2" class="copy-btn" onclick="copyToClipboard('prompt2', 'btn2')">コピー</button>
+        <code id="prompt2">4歳児向け。あーちゃんと妹みーちゃんの冒険を童話風300字で</code>
+        <button onclick="copyToClipboard('prompt2')">コピー</button>
       </div>
+      <p>※お子さんへの読み聞かせに使える、引き込まれるストーリーを生成します。</p>
     </section>
 
-    <!-- 3歳児向け 空が青い理由の説明 -->
     <section>
-      <h2>3歳児向け 空が青い理由の説明</h2>
+      <h2>Demo C：タスク優先度相談</h2>
       <p>プロンプト：</p>
       <div class="copy-box">
-        <code id="prompt3">空が青い理由を3歳児がわかるように説明して</code>
-        <button id="btn3" class="copy-btn" onclick="copyToClipboard('prompt3', 'btn3')">コピー</button>
+        <code id="prompt3">タスクA=経費精算、タスクB=顧客資料修正。どちらを先に？判断材料と順番を教えて</code>
+        <button onclick="copyToClipboard('prompt3')">コピー</button>
       </div>
+      <p>※複数のタスクの優先順位を判断するフレームと手順を提案します。</p>
     </section>
-
-    <!-- 日付の変換 -->
-    <section>
-      <h2>日付の箇条書き変換</h2>
-      <p>プロンプト：</p>
-      <div class="copy-box">
-        <code id="prompt4">以下の日付一覧を日付を次の形の箇条書きに直してください。年は2025年です。□元の日付：3/16記念日１,5/3記念日２,11/18記念日３　□変換する例：＊3/15(土)：生成AIセミナー</code>
-        <button id="btn4" class="copy-btn" onclick="copyToClipboard('prompt4', 'btn4')">コピー</button>
-      </div>
-    </section>
-
   </div>
-  <p>&copy; 2024 くじら All rights reserved.</p>
 </body>
-
 </html>

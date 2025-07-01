@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生成AIスタートダッシュ講座実践 - プロンプト集</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+      color: white;
+    }
+
+    .header h1 {
+      font-size: 2.3rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      margin-bottom: 30px;
+    }
+
+    .chat-link {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 25px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    .chat-link:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .instructions {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      margin-bottom: 40px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .instructions h2 {
+      color: #2c3e50;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+      border-bottom: 3px solid #667eea;
+      padding-bottom: 10px;
+    }
+
+    .instructions h3 {
+      color: #34495e;
+      margin: 20px 0 10px 0;
+      font-size: 1.2rem;
+    }
+
+    .instructions ul {
+      margin-left: 20px;
+      margin-bottom: 15px;
+    }
+
+    .instructions li {
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      text-align: center;
+      color: white;
+      font-size: 2rem;
+      margin: 50px 0 30px 0;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: white;
+      font-size: 1.5rem;
+      margin: 40px 0 30px 0;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      opacity: 0.9;
+    }
+
+    .prompts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+
+    .prompt-card {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .prompt-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .prompt-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+    }
+
+    .prompt-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      color: #2c3e50;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .prompt-card .icon {
+      font-size: 1.4rem;
+    }
+
+    .prompt-description {
+      color: #666;
+      margin-bottom: 15px;
+      line-height: 1.5;
+      font-size: 0.95rem;
+    }
+
+    .copy-container {
+      background: #f8f9fa;
+      border-radius: 10px;
+      padding: 15px;
+      border-left: 4px solid #667eea;
+      margin-bottom: 15px;
+    }
+
+    .prompt-text {
+      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+      background: white;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #e9ecef;
+      line-height: 1.4;
+      font-size: 0.85rem;
+      max-height: 250px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+    }
+
+    .copy-btn {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      width: 100%;
+      font-size: 0.9rem;
+    }
+
+    .copy-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    .copy-btn:active {
+      transform: translateY(0);
+    }
+
+    .copy-btn.copied {
+      background: linear-gradient(135deg, #28a745, #20c997);
+    }
+
+    .tag {
+      display: inline-block;
+      background: rgba(102, 126, 234, 0.1);
+      color: #667eea;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .warning {
+      background: #fff3cd;
+      border: 1px solid #ffeaa7;
+      border-radius: 8px;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 0.85rem;
+      color: #856404;
+    }
+
+    .multi-prompt {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .prompt-step {
+      background: transparent;
+      border-radius: 8px;
+      padding: 10px 0;
+      border-left: none;
+    }
+
+    .step-label {
+      font-weight: bold;
+      color: #667eea;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px 15px;
+      }
+
+      .header h1 {
+        font-size: 1.8rem;
+      }
+
+      .prompts-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .prompt-card {
+        padding: 20px;
+      }
+
+      .instructions {
+        padding: 20px;
+      }
+    }
+
+    /* スクロールバーのスタイリング */
+    .prompt-text::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .prompt-text::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 3px;
+    }
+
+    .prompt-text::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 3px;
+    }
+
+    .prompt-text::-webkit-scrollbar-thumb:hover {
+      background: #999;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🤖 生成AIスタートダッシュ講座実践</h1>
+      <p>プロンプト集 - 実践セッション補助ツール</p>
+      <a href="https://chat.openai.com" class="chat-link" target="_blank">
+        🚀 ChatGPTで今すぐ試す
+      </a>
+    </div>
+
+    <div class="instructions">
+      <h2>📖 本Webページの使い方</h2>
+      <ul>
+        <li>本Webページはくじらが主催する「生成AIスタートダッシュ講座実践」の実践セッションで使用する補助ツールです。</li>
+        <li>以下の内容を講師と一緒にご自身が利用しているテキスト生成AIに入力していただき、生成AIの活用を実践していきます。</li>
+        <li>各テーマの中で、生成AIの入力画面にコピー＆ペーストをしていただきます。このページからコピーの際は指示文（プロンプト）の隣のコピーボタンを押してください。</li>
+        <li>上から順番に進めていきます。基本的には１つのテーマにつき２つの指示文（プロンプト）があり、１つ目を実行したあとに続けて２つ目を実行します。</li>
+        <li>不明点があれば、お気軽に講師に質問しながら進めてください。</li>
+        <li><strong>このページは本講座専用に作成したものです。個人利用にとどめていただき、SNSや知人への拡散はご遠慮ください</strong></li>
+      </ul>
+
+      <h3>⌨️ 基本操作方法</h3>
+      <ul>
+        <li>PCで改行する場合、Shift＋Enterボタンで改行</li>
+        <li>テキストを選択して「Ctrl + C」（Macの場合「Command + C」）でコピー</li>
+        <li>コピーしたテキストを貼り付ける際は、カーソルを適切な場所に置いて「Ctrl + V」（Macの場合「Command + V」）でペースト</li>
+        <li>「Ctrl + Z」（Macの場合「Command + Z」）で直前の操作を取り消し</li>
+        <li>「Alt + Tab」（Macの場合「Command + Tab」）でウィンドウを切り替え</li>
+      </ul>
+      <div class="warning">
+        <strong>■注意:</strong> 操作を間違えてもやり直せますので、落ち着いて進めていきましょう。
+      </div>
+    </div>
+
+    <h2 class="section-title">🎯 メイン実践セッション</h2>
+
+    <div class="prompts-grid">
+      <div class="prompt-card">
+        <div class="tag">チーム管理</div>
+        <h3>
+          <span class="icon">💬</span>
+          Teamsチャット解析
+        </h3>
+        <p class="prompt-description">
+          チャットログから依頼内容を抽出し、上司への報告文として整理します。優先度も自動判定されます。
+        </p>
+        <div class="copy-container">
+          <div class="prompt-text" id="prompt1">以下は、あるプロジェクトのTeamsチャットのやりとりです。
+
+このログから「依頼内容」を抽出し、上司への報告文フォーマットでまとめてください。
+
+優先度は期限の近さや業務インパクトに基づいて推定しました。
+
+#フォーマット
+「各メンバーの作業予定は下記のとおりです。」
+
+| 発言者 | 依頼内容 | 期限 | 推定優先度 |
+|-------|---------|------|-----------|
+
+【チャットログ】
+※ここにTeamsのチャットログを貼り付けてください</div>
+          <button class="copy-btn" id="btn1" onclick="copyToClipboard('prompt1', 'btn1')">📋 プロンプトをコピー</button>
+        </div>
+      </div>
+
+      <div class="prompt-card">
+        <div class="tag">生活・料理</div>
+        <h3>
+          <span class="icon">🍽️</span>
+          家庭料理レシピ提案
+        </h3>
+        <p class="prompt-description">
+          家にある食材を活用して、家族構成に合わせたメニューと買い物リストを提案します。
+        </p>
+        <div class="copy-container">
+          <div class="prompt-text" id="prompt2">家にある食材で夕食を考えたいです。
+
+以下の条件で、4人家族（大人2人・幼児2人）向けのメニュー案を3つ提案し、それぞれに必要な買い物リストを教えてください。
+
+子供たちは甘い味付けを好みます。
+
+#家にある食材
+- ブロッコリー
+- 玉ねぎ  
+- ジャガイモ
+- 牛乳 500ml（賞味期限が近いので今日中に使い切りたい）
+
+※一般的な調味料は揃っています。
+※家にある食材リストは実際の状況に合わせて変更してください</div>
+          <button class="copy-btn" id="btn2" onclick="copyToClipboard('prompt2', 'btn2')">📋 プロンプトをコピー</button>
+        </div>
+      </div>
+
+      <div class="prompt-card">
+        <div class="tag">相談・コーチング</div>
+        <h3>
+          <span class="icon">⚡</span>
+          タイムマネジメント相談
+        </h3>
+        <p class="prompt-description">
+          専門家ペルソナによる優先順位付けと時間管理のアドバイス。複数タスクの判断をサポートします。
+        </p>
+        <div class="copy-container">
+          <div class="prompt-text" id="prompt3">【ペルソナ設定】
+あなたは「タイムマネジメントと優先順位付けの専門家」です。
+
+豊富なプロジェクトマネジメント経験をもち、限られた時間・リソースの中で最善の決断を導くサポートを行います。
+
+落ち着いた口調で、深い洞察と実行可能なアクションを示してください。
+
+【プロンプト】
+以下の状況をもとに、まず優先順位をつけるための「判断基準」を提示し、必要な情報が不足している場合は追加質問を行ってください。
+
+その後、確認した基準に沿って各タスクの優先順位と今日中にとるべき具体策を提案してください。
+
+―――
+【状況】
+1. 週末締切の○○社向け提案資料を作成中
+2. 上司から追加依頼された■■社向けトライアル課題調査（〆切：明日）  
+3. OJT担当の後輩からの相談対応依頼あり
+
+※本日は16:00に退社必須で以降作業できません。
+―――
+
+※実際の状況に合わせてタスク内容を変更してください</div>
+          <button class="copy-btn" id="btn3" onclick="copyToClipboard('prompt3', 'btn3')">📋 プロンプトをコピー</button>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="section-subtitle">⏰ 時間があったら実施枠</h2>
+
+    <div class="prompts-grid">
+      <div class="prompt-card">
+        <div class="tag">Excel・データ管理</div>
+        <h3>
+          <span class="icon">📊</span>
+          EXCEL関数作成
+        </h3>
+        <p class="prompt-description">
+          進捗管理表の作成と自動判定関数の実装。営業日ベースの日数計算も含みます。
+        </p>
+        <div class="multi-prompt">
+          <div class="prompt-step">
+            <div class="step-label">ステップ1: 表作成</div>
+            <div class="copy-container">
+              <div class="prompt-text" id="prompt4">進捗管理表作成のため以下の列を含んだ内容を表形式で作成してください。表はこちらに直接記載してください。タスク名、担当者、開始日、完了予定日、実際の完了日、進捗状況、所要日数、備考</div>
+              <button class="copy-btn" id="btn4" onclick="copyToClipboard('prompt4', 'btn4')">📋 プロンプトをコピー</button>
+            </div>
+          </div>
+          <div class="prompt-step">
+            <div class="step-label">ステップ2: 関数実装</div>
+            <div class="copy-container">
+              <div class="prompt-text" id="prompt5">上記の表に以下の関数を実装してください。関数はテキスト形式でこちらに記載してください。また、タスク名をA1セルとして、適切なセルを設定してください。 進捗状況：完了日に基づいて、タスクが遅延しているか進行中かを自動判定する 所要日数：営業日ベースのタスク所要日数を計算する関数</div>
+              <button class="copy-btn" id="btn5" onclick="copyToClipboard('prompt5', 'btn5')">📋 プロンプトをコピー</button>
+            </div>
+          </div>
+        </div>
+        <div class="warning">
+          <strong>■注意:</strong> 関数の結果に誤りがないか、セルの指定が適切か実際のExcel画面で確認しましょう。
+        </div>
+      </div>
+
+      <div class="prompt-card">
+        <div class="tag">トラブルシューティング</div>
+        <h3>
+          <span class="icon">🔧</span>
+          不具合調査
+        </h3>
+        <p class="prompt-description">
+          Excelの不具合について段階的に解決策を探ります。初回で解決しない場合の追加対策も含みます。
+        </p>
+        <div class="multi-prompt">
+          <div class="prompt-step">
+            <div class="step-label">ステップ1: 初回相談</div>
+            <div class="copy-container">
+              <div class="prompt-text" id="prompt6">Excelのシートをコピーする時に「名前は既に存在します」と出たのですが何が原因ですか？解決方法はありますか。</div>
+              <button class="copy-btn" id="btn6" onclick="copyToClipboard('prompt6', 'btn6')">📋 プロンプトをコピー</button>
+            </div>
+          </div>
+          <div class="prompt-step">
+            <div class="step-label">ステップ2: 追加対策相談</div>
+            <div class="copy-container">
+              <div class="prompt-text" id="prompt7">上記の方法を試しましたが解消しません。他に考えられる対策はありますか。</div>
+              <button class="copy-btn" id="btn7" onclick="copyToClipboard('prompt7', 'btn7')">📋 プロンプトをコピー</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="prompt-card">
+        <div class="tag">プレゼン・企画</div>
+        <h3>
+          <span class="icon">📈</span>
+          プレゼンの概要作成
+        </h3>
+        <p class="prompt-description">
+          イベント提案のプレゼン資料構成を設計し、各ページで必要な準備内容を明確化します。
+        </p>
+        <div class="multi-prompt">
+          <div class="prompt-step">
+            <div class="step-label">ステップ1: 概要設計</div>
+            <div class="copy-container">
+              <div class="prompt-text" id="prompt8">これからイベントの提案資料を作成します。相手は施設のオーナーです。イベントの目的は集客です。プレゼンのゴールはこの提案の魅力について伝え、了承を得ることです。このプレゼン資料の概要を作成してください。</div>
+              <button class="copy-btn" id="btn8" onclick="copyToClipboard('prompt8', 'btn8')">📋 プロンプトをコピー</button>
+            </div>
+          </div>
+          <div class="prompt-step">
+            <div class="step-label">ステップ2: 準備内容確認</div>
+            <div class="copy-container">
+              <div class="prompt-text" id="prompt9">この概要に沿って、それぞれのページにおいてこちらが準備するべきと思われることを予想して提示してください。</div>
+              <button class="copy-btn" id="btn9" onclick="copyToClipboard('prompt9', 'btn9')">📋 プロンプトをコピー</button>
+            </div>
+          </div>
+        </div>
+        <div class="warning">
+          <strong>■注意:</strong> 一般的な提案になるため、個別の要件については人のカスタマイズが必要です
+        </div>
+      </div>
+
+      <div class="prompt-card">
+        <div class="tag">ビジネス文書</div>
+        <h3>
+          <span class="icon">📧</span>
+          Eメール作成
+        </h3>
+        <p class="prompt-description">
+          トラブル発生時の状況報告メールを作成し、文法・敬語チェックまで行います。
+        </p>
+        <div class="multi-prompt">
+          <div class="prompt-step">
+            <div class="step-label">ステップ1: メール作成</div>
+            <div class="copy-container">
+              <div class="prompt-text" id="prompt10">あなたは、トラブル発生時の状況報告と対応策をスムーズに伝えるプロのビジネスライターです。 このメールは、関係者が状況を把握し、迅速にサポートや対応を行えるよう誘導するものです。以下の点を考慮してメールを作成してください。 #ターゲットオーディエンス: ・トラブルに関わる上司や同僚、関連部門の担当者 #目的: ・トラブルの発生状況と現時点での対応策を迅速に共有 ・必要なサポートや判断が得られるようにすること #トーンとスタイル: ・冷静で信頼を感じさせるプロフェッショナルなトーン ・不安を和らげつつ、的確で具体的な情報を提供する #フック: ・メール冒頭で「重要なトラブル発生のお知らせ」と明記 ・トラブルの概要や影響範囲を簡潔に伝え、注目を引く #パーソナライゼーション: ・担当者名や役職名を入れることで、関係者に対して直接的に配慮 ・相手の業務や状況に配慮し、迅速な行動を促すための具体的な情報提供 #構成: 序章: トラブル発生状況の簡潔な概要とお詫びの言葉 本文: 影響範囲と対応策の詳細、現在の進行状況や今後の予定 サポート要請: 特にサポートや確認が必要な点について明確に依頼 CTA (Call to Action): 上司や関連部門に対して、次のアクション（確認、判断など）を具体的に依頼する #感情的な訴求: ・迅速かつ冷静な対応を強調し、相手が安心できるよう配慮 ・問題解決に向けて全力で取り組む姿勢を表現 #言葉の選び方: ・専門用語は避け、シンプルでわかりやすい表現 ・「迅速に」「確実に」など、行動を促す言葉を含む #例文: 「発生した〇〇システム障害に関する状況報告」をテーマに、関係者が安心し、必要なサポートを提供できるようなメールの内容を作成。 #サポート依頼の提案: 「この対応に関して〇〇の確認が必要です。お手数ですが、ご確認いただきますようお願い申し上げます。」</div>
+              <button class="copy-btn" id="btn10" onclick="copyToClipboard('prompt10', 'btn10')">📋 プロンプトをコピー</button>
+            </div>
+          </div>
+          <div class="prompt-step">
+            <div class="step-label">ステップ2: 文章チェック</div>
+            <div class="copy-container">
+              <div class="prompt-text" id="prompt11">以下のメール文章を確認し、不自然な表現や改善が必要な点を漏れなくリストアップした上で、それぞれに対する修正案を提案してください。 特に、文法ミス、敬語の誤用、誤字脱字、漢字間違い、日付と実際の曜日の不一致（日本の２０２４年基準）に注意してください。 お疲れ様です。営業部の鯨岡浩子です。 本日、顧客データ管理システムに関するトラブルが発生しましたことをお知らせいたします。 この件について、関係者の皆様にお詫び申し上げます。現在、状況の把握と対応全力を尽くしております。 【トラブル概要】 発生したトラブルは顧客データ管理システムの障害であり、影響範囲は営業部およびサポート部の業務に及びます。 現時点で確認されている問題点は以下の通りです。。 ・データアクセスが不能 ・一部データの欠損が確認済 【対応策】 現在、以下の対応策を進めております。 ・システムのリスタート ・データベースの復元と検証作業 進行状況としては、リスタートは完了したものの、復元作業はまだ途中で、明日午後までの完了を見込んでおります。 【サポート依頼】 この対応に関して、営業部およびサポート部への影響再度ご確認いただけると幸いです。 お手数ですが、ご確認いただきますようお願い申し上げます。 【次のアクション】 上司や関連部門の皆様には、迅速な判断および確認を願いしたく思います。 特に影響範囲の確認については、10月28(火)までにご意見をいただけますと助かります。 迅速かつ冷静な対応を心掛け、全力で問題解決に取り組んでおります。 何卒、ご理解とご協力をお願い申し上げます。</div>
+              <button class="copy-btn" id="btn11" onclick="copyToClipboard('prompt11', 'btn11')">📋 プロンプトをコピー</button>
+            </div>
+          </div>
+        </div>
+        <div class="warning">
+          <strong>■注意:</strong> 過信しすぎは禁物です。送信前のチェックは必ず行いましょう。
+        </div>
+      </div>
+
+      <div class="prompt-card">
+        <div class="tag">教育・説明</div>
+        <h3>
+          <span class="icon">🌟</span>
+          3歳児向け 空が青い理由の説明
+        </h3>
+        <p class="prompt-description">
+          複雑な科学現象を子供にもわかりやすく説明する技術を学びます。
+        </p>
+        <div class="copy-container">
+          <div class="prompt-text" id="prompt12">空が青い理由を3歳児がわかるように説明して</div>
+          <button class="copy-btn" id="btn12" onclick="copyToClipboard('prompt12', 'btn12')">📋 プロンプトをコピー</button>
+        </div>
+      </div>
+
+      <div class="prompt-card">
+        <div class="tag">生活・料理</div>
+        <h3>
+          <span class="icon">⚡</span>
+          時短レシピ提案
+        </h3>
+        <p class="prompt-description">
+          業務スーパーの冷凍野菜を活用した電子レンジ調理レシピを提案します。
+        </p>
+        <div class="copy-container">
+          <div class="prompt-text" id="prompt13">業務スーパーの冷凍野菜を使って電子レンジで作れる時短レシピを提案して</div>
+          <button class="copy-btn" id="btn13" onclick="copyToClipboard('prompt13', 'btn13')">📋 プロンプトをコピー</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function copyToClipboard(promptId, btnId) {
+      const prompt = document.getElementById(promptId);
+      const button = document.getElementById(btnId);
+      
+      navigator.clipboard.writeText(prompt.textContent).then(() => {
+        // ボタンの状態を変更
+        button.textContent = '✅ コピー完了！';
+        button.classList.add('copied');
+        
+        // 2秒後に元に戻す
+        setTimeout(() => {
+          button.textContent = '📋 プロンプトをコピー';
+          button.classList.remove('copied');
+        }, 2000);
+      }).catch(err => {
+        button.textContent = '❌ コピー失敗';
+        console.error('Copy failed:', err);
+        
+        setTimeout(() => {
+          button.textContent = '📋 プロンプトをコピー';
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>

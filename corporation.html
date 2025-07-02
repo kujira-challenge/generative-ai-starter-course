@@ -328,249 +328,277 @@
       </div>
     </div>
 
-    <h2 class="section-title">🎯 メイン実践セッション</h2>
+    <h2 class="section-title">🎯 実践セッション1：業務効率アップ</h2>
 
     <div class="prompts-grid">
       <div class="prompt-card">
-        <div class="tag">チーム管理</div>
+        <div class="tag">タスク管理</div>
         <h3>
           <span class="icon">💬</span>
-          Teamsチャット解析
+          1-1. チャット内容→タスク表化
         </h3>
         <p class="prompt-description">
-          チャットログから依頼内容を抽出し、上司への報告文として整理します。優先度も自動判定されます。
+          Teamsチャットログから依頼内容を抽出し、担当者ごとの表にまとめます。優先度も自動判定されます。
         </p>
         <div class="copy-container">
-          <div class="prompt-text" id="prompt1">以下は、あるプロジェクトのTeamsチャットのやりとりです。
-
-このログから「依頼内容」を抽出し、上司への報告文フォーマットでまとめてください。
-
-優先度は期限の近さや業務インパクトに基づいて推定しました。
-
-#フォーマット
-「各メンバーの作業予定は下記のとおりです。」
-
-| 発言者 | 依頼内容 | 期限 | 推定優先度 |
-|-------|---------|------|-----------|
-
+          <div class="prompt-text" id="prompt1">【ペルソナ設定】
+あなたは「社内タスク管理マスター」です。
+【ステップ1】
+以下のTeamsチャットログから「依頼内容」を抽出し、
+【ステップ2】
+次のフォーマットで担当者ごとの表にまとめてください。
+| 担当者 | 依頼内容                          | 期限        | 推定優先度 |
+【ステップ3】
+期限が不明な場合「未設定」、優先度は「高／中／低」で記載。
+―――
 【チャットログ】
-※ここにTeamsのチャットログを貼り付けてください</div>
+2025/06/30 09:00 山田：おはようございます。週報ドラフトの最新版を月曜朝までに共有いただけますか？
+2025/06/30 09:02 鈴木：おはようございます。承知しました。週報用のメモをまとめて、明日朝までにあげます。
+2025/06/30 09:05 田中：お疲れ様です。先日のアンケート結果をまとめた表を今日午後までに共有しますね。
+2025/06/30 09:08 山田：ありがとうございます。部署長向けに情報更新できるようお願いいたします。
+2025/06/30 09:10 鈴木：了解です。その後、報告書の構成案も週内に策定しておきます。
+2025/06/30 09:12 田中：クライアント資料のレビュー結果を明日午前中にまとめて共有します。
+2025/06/30 09:14 山田：助かります。明日の会議までに反映できそうでしょうか？
+2025/06/30 09:16 田中：はい、問題なければ明日の午前中に完了します。
+2025/06/30 09:18 鈴木：テスト環境の更新案を本日15時までに作成します。
+2025/06/30 09:20 田中：ありがとうございます。環境更新手順書も併せて作成していただけますか？
+2025/06/30 09:22 鈴木：承知しました。手順書のドラフトは夕方までに用意します。
+2025/06/30 09:25 山田：お二人ともありがとうございます。他に気づきがあれば週報に追加してください。
+2025/06/30 09:28 鈴木：了解しました。追加項目があれば追記します。
+2025/06/30 09:30 田中：各自の進捗をSlackにも投稿しておきます。
+2025/06/30 09:32 山田：ありがとうございます。
+2025/06/30 09:35 鈴木：会議資料のサマリーも週明けに共有します。
+2025/06/30 09:37 田中：了解しました。
+―――</div>
           <button class="copy-btn" id="btn1" onclick="copyToClipboard('prompt1', 'btn1')">📋 プロンプトをコピー</button>
         </div>
       </div>
 
       <div class="prompt-card">
-        <div class="tag">生活・料理</div>
+        <div class="tag">優先順位</div>
         <h3>
-          <span class="icon">🍽️</span>
-          家庭料理レシピ提案
+          <span class="icon">📊</span>
+          1-2. タスクの優先順位マトリクス化
         </h3>
         <p class="prompt-description">
-          家にある食材を活用して、家族構成に合わせたメニューと買い物リストを提案します。
+          タスクリストを重要度・緊急度で4象限に分類し、象限ごとにアクションアドバイスを提供します。
         </p>
         <div class="copy-container">
-          <div class="prompt-text" id="prompt2">家にある食材で夕食を考えたいです。
-
-以下の条件で、4人家族（大人2人・幼児2人）向けのメニュー案を3つ提案し、それぞれに必要な買い物リストを教えてください。
-
-子供たちは甘い味付けを好みます。
-
-#家にある食材
-- ブロッコリー
-- 玉ねぎ  
-- ジャガイモ
-- 牛乳 500ml（賞味期限が近いので今日中に使い切りたい）
-
-※一般的な調味料は揃っています。
-※家にある食材リストは実際の状況に合わせて変更してください</div>
+          <div class="prompt-text" id="prompt2">【ペルソナ設定】
+あなたは「業務効率化の達人」です。
+【ステップ1】
+以下のタスクリストを受け取り、重要度・緊急度を判定してください。
+【ステップ2】
+「重要度×緊急度」4象限に分類し、表形式で出力。
+| タスク                 | 重要度 | 緊急度 | 象限   |
+【ステップ3】
+象限ごとにコメント（例：「このタスクは今すぐ着手」「延期検討」など）を添える。
+―――
+【タスクリスト】
+– 週報ドラフト共有（期限：明日午前）
+– テスト結果フィードバック（期限：本日17時）
+– クライアント資料レビュー（期限：7/1）
+―――</div>
           <button class="copy-btn" id="btn2" onclick="copyToClipboard('prompt2', 'btn2')">📋 プロンプトをコピー</button>
         </div>
       </div>
 
       <div class="prompt-card">
-        <div class="tag">相談・コーチング</div>
+        <div class="tag">レポート作成</div>
         <h3>
-          <span class="icon">⚡</span>
-          タイムマネジメント相談
+          <span class="icon">📄</span>
+          1-3. レポートドラフト 最終仕上げ
         </h3>
         <p class="prompt-description">
-          専門家ペルソナによる優先順位付けと時間管理のアドバイス。複数タスクの判断をサポートします。
+          たたき台テキストを4つのセクション構成で整理し、読みやすい最終ドラフトを作成します。
         </p>
         <div class="copy-container">
           <div class="prompt-text" id="prompt3">【ペルソナ設定】
-あなたは「タイムマネジメントと優先順位付けの専門家」です。
-
-豊富なプロジェクトマネジメント経験をもち、限られた時間・リソースの中で最善の決断を導くサポートを行います。
-
-落ち着いた口調で、深い洞察と実行可能なアクションを示してください。
-
-【プロンプト】
-以下の状況をもとに、まず優先順位をつけるための「判断基準」を提示し、必要な情報が不足している場合は追加質問を行ってください。
-
-その後、確認した基準に沿って各タスクの優先順位と今日中にとるべき具体策を提案してください。
-
-―――
-【状況】
-1. 週末締切の○○社向け提案資料を作成中
-2. 上司から追加依頼された■■社向けトライアル課題調査（〆切：明日）  
-3. OJT担当の後輩からの相談対応依頼あり
-
-※本日は16:00に退社必須で以降作業できません。
-―――
-
-※実際の状況に合わせてタスク内容を変更してください</div>
+あなたは「報告書ライティングエキスパート」です。
+【ステップ1】
+以下のたたき台テキストを受け取り、
+【ステップ2】
+・見出し（Title）
+・導入（Context）
+・結論（Key Findings）
+・次のアクション（Action Items）
+の4セクションで「最終ドラフト」を作成してください。
+【たたき台テキスト】
+今週は、主要KPIのいくつかに明確な変化が見られました。問い合わせ対応件数は先週に比べて増加しており、同時に応答時間の平均も若干延びています。また、コンバージョン率については前週比で低下が確認され、特にモバイル経由の離脱率が高まっていることが課題として浮上しました。
+顧客満足度は依然として高水準を維持しているものの、自由記述コメントからは「初回応答が遅い」「案内が分かりにくい」といったフィードバックも見受けられました。
+これらを踏まえ、業務負荷の分散や対応品質の標準化、ユーザー導線の改善などが今後の重点対応項目となる見込みです。加えて、来週に向けては、A/Bテストの実施やCS対応体制の見直しが必要と考えられます。</div>
           <button class="copy-btn" id="btn3" onclick="copyToClipboard('prompt3', 'btn3')">📋 プロンプトをコピー</button>
         </div>
       </div>
     </div>
 
-    <h2 class="section-subtitle">⏰ 時間があったら実施枠</h2>
+    <h2 class="section-title">🏠 実践セッション2：日常効率化</h2>
 
     <div class="prompts-grid">
       <div class="prompt-card">
-        <div class="tag">Excel・データ管理</div>
-        <h3>
-          <span class="icon">📊</span>
-          EXCEL関数作成
-        </h3>
-        <p class="prompt-description">
-          進捗管理表の作成と自動判定関数の実装。営業日ベースの日数計算も含みます。
-        </p>
-        <div class="multi-prompt">
-          <div class="prompt-step">
-            <div class="step-label">ステップ1: 表作成</div>
-            <div class="copy-container">
-              <div class="prompt-text" id="prompt4">進捗管理表作成のため以下の列を含んだ内容を表形式で作成してください。表はこちらに直接記載してください。タスク名、担当者、開始日、完了予定日、実際の完了日、進捗状況、所要日数、備考</div>
-              <button class="copy-btn" id="btn4" onclick="copyToClipboard('prompt4', 'btn4')">📋 プロンプトをコピー</button>
-            </div>
-          </div>
-          <div class="prompt-step">
-            <div class="step-label">ステップ2: 関数実装</div>
-            <div class="copy-container">
-              <div class="prompt-text" id="prompt5">上記の表に以下の関数を実装してください。関数はテキスト形式でこちらに記載してください。また、タスク名をA1セルとして、適切なセルを設定してください。 進捗状況：完了日に基づいて、タスクが遅延しているか進行中かを自動判定する 所要日数：営業日ベースのタスク所要日数を計算する関数</div>
-              <button class="copy-btn" id="btn5" onclick="copyToClipboard('prompt5', 'btn5')">📋 プロンプトをコピー</button>
-            </div>
-          </div>
-        </div>
-        <div class="warning">
-          <strong>■注意:</strong> 関数の結果に誤りがないか、セルの指定が適切か実際のExcel画面で確認しましょう。
-        </div>
-      </div>
-
-      <div class="prompt-card">
-        <div class="tag">トラブルシューティング</div>
-        <h3>
-          <span class="icon">🔧</span>
-          不具合調査
-        </h3>
-        <p class="prompt-description">
-          Excelの不具合について段階的に解決策を探ります。初回で解決しない場合の追加対策も含みます。
-        </p>
-        <div class="multi-prompt">
-          <div class="prompt-step">
-            <div class="step-label">ステップ1: 初回相談</div>
-            <div class="copy-container">
-              <div class="prompt-text" id="prompt6">Excelのシートをコピーする時に「名前は既に存在します」と出たのですが何が原因ですか？解決方法はありますか。</div>
-              <button class="copy-btn" id="btn6" onclick="copyToClipboard('prompt6', 'btn6')">📋 プロンプトをコピー</button>
-            </div>
-          </div>
-          <div class="prompt-step">
-            <div class="step-label">ステップ2: 追加対策相談</div>
-            <div class="copy-container">
-              <div class="prompt-text" id="prompt7">上記の方法を試しましたが解消しません。他に考えられる対策はありますか。</div>
-              <button class="copy-btn" id="btn7" onclick="copyToClipboard('prompt7', 'btn7')">📋 プロンプトをコピー</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="prompt-card">
-        <div class="tag">プレゼン・企画</div>
-        <h3>
-          <span class="icon">📈</span>
-          プレゼンの概要作成
-        </h3>
-        <p class="prompt-description">
-          イベント提案のプレゼン資料構成を設計し、各ページで必要な準備内容を明確化します。
-        </p>
-        <div class="multi-prompt">
-          <div class="prompt-step">
-            <div class="step-label">ステップ1: 概要設計</div>
-            <div class="copy-container">
-              <div class="prompt-text" id="prompt8">これからイベントの提案資料を作成します。相手は施設のオーナーです。イベントの目的は集客です。プレゼンのゴールはこの提案の魅力について伝え、了承を得ることです。このプレゼン資料の概要を作成してください。</div>
-              <button class="copy-btn" id="btn8" onclick="copyToClipboard('prompt8', 'btn8')">📋 プロンプトをコピー</button>
-            </div>
-          </div>
-          <div class="prompt-step">
-            <div class="step-label">ステップ2: 準備内容確認</div>
-            <div class="copy-container">
-              <div class="prompt-text" id="prompt9">この概要に沿って、それぞれのページにおいてこちらが準備するべきと思われることを予想して提示してください。</div>
-              <button class="copy-btn" id="btn9" onclick="copyToClipboard('prompt9', 'btn9')">📋 プロンプトをコピー</button>
-            </div>
-          </div>
-        </div>
-        <div class="warning">
-          <strong>■注意:</strong> 一般的な提案になるため、個別の要件については人のカスタマイズが必要です
-        </div>
-      </div>
-
-      <div class="prompt-card">
-        <div class="tag">ビジネス文書</div>
-        <h3>
-          <span class="icon">📧</span>
-          Eメール作成
-        </h3>
-        <p class="prompt-description">
-          トラブル発生時の状況報告メールを作成し、文法・敬語チェックまで行います。
-        </p>
-        <div class="multi-prompt">
-          <div class="prompt-step">
-            <div class="step-label">ステップ1: メール作成</div>
-            <div class="copy-container">
-              <div class="prompt-text" id="prompt10">あなたは、トラブル発生時の状況報告と対応策をスムーズに伝えるプロのビジネスライターです。 このメールは、関係者が状況を把握し、迅速にサポートや対応を行えるよう誘導するものです。以下の点を考慮してメールを作成してください。 #ターゲットオーディエンス: ・トラブルに関わる上司や同僚、関連部門の担当者 #目的: ・トラブルの発生状況と現時点での対応策を迅速に共有 ・必要なサポートや判断が得られるようにすること #トーンとスタイル: ・冷静で信頼を感じさせるプロフェッショナルなトーン ・不安を和らげつつ、的確で具体的な情報を提供する #フック: ・メール冒頭で「重要なトラブル発生のお知らせ」と明記 ・トラブルの概要や影響範囲を簡潔に伝え、注目を引く #パーソナライゼーション: ・担当者名や役職名を入れることで、関係者に対して直接的に配慮 ・相手の業務や状況に配慮し、迅速な行動を促すための具体的な情報提供 #構成: 序章: トラブル発生状況の簡潔な概要とお詫びの言葉 本文: 影響範囲と対応策の詳細、現在の進行状況や今後の予定 サポート要請: 特にサポートや確認が必要な点について明確に依頼 CTA (Call to Action): 上司や関連部門に対して、次のアクション（確認、判断など）を具体的に依頼する #感情的な訴求: ・迅速かつ冷静な対応を強調し、相手が安心できるよう配慮 ・問題解決に向けて全力で取り組む姿勢を表現 #言葉の選び方: ・専門用語は避け、シンプルでわかりやすい表現 ・「迅速に」「確実に」など、行動を促す言葉を含む #例文: 「発生した〇〇システム障害に関する状況報告」をテーマに、関係者が安心し、必要なサポートを提供できるようなメールの内容を作成。 #サポート依頼の提案: 「この対応に関して〇〇の確認が必要です。お手数ですが、ご確認いただきますようお願い申し上げます。」</div>
-              <button class="copy-btn" id="btn10" onclick="copyToClipboard('prompt10', 'btn10')">📋 プロンプトをコピー</button>
-            </div>
-          </div>
-          <div class="prompt-step">
-            <div class="step-label">ステップ2: 文章チェック</div>
-            <div class="copy-container">
-              <div class="prompt-text" id="prompt11">以下のメール文章を確認し、不自然な表現や改善が必要な点を漏れなくリストアップした上で、それぞれに対する修正案を提案してください。 特に、文法ミス、敬語の誤用、誤字脱字、漢字間違い、日付と実際の曜日の不一致（日本の２０２４年基準）に注意してください。 お疲れ様です。営業部の鯨岡浩子です。 本日、顧客データ管理システムに関するトラブルが発生しましたことをお知らせいたします。 この件について、関係者の皆様にお詫び申し上げます。現在、状況の把握と対応全力を尽くしております。 【トラブル概要】 発生したトラブルは顧客データ管理システムの障害であり、影響範囲は営業部およびサポート部の業務に及びます。 現時点で確認されている問題点は以下の通りです。。 ・データアクセスが不能 ・一部データの欠損が確認済 【対応策】 現在、以下の対応策を進めております。 ・システムのリスタート ・データベースの復元と検証作業 進行状況としては、リスタートは完了したものの、復元作業はまだ途中で、明日午後までの完了を見込んでおります。 【サポート依頼】 この対応に関して、営業部およびサポート部への影響再度ご確認いただけると幸いです。 お手数ですが、ご確認いただきますようお願い申し上げます。 【次のアクション】 上司や関連部門の皆様には、迅速な判断および確認を願いしたく思います。 特に影響範囲の確認については、10月28(火)までにご意見をいただけますと助かります。 迅速かつ冷静な対応を心掛け、全力で問題解決に取り組んでおります。 何卒、ご理解とご協力をお願い申し上げます。</div>
-              <button class="copy-btn" id="btn11" onclick="copyToClipboard('prompt11', 'btn11')">📋 プロンプトをコピー</button>
-            </div>
-          </div>
-        </div>
-        <div class="warning">
-          <strong>■注意:</strong> 過信しすぎは禁物です。送信前のチェックは必ず行いましょう。
-        </div>
-      </div>
-
-      <div class="prompt-card">
-        <div class="tag">教育・説明</div>
-        <h3>
-          <span class="icon">🌟</span>
-          3歳児向け 空が青い理由の説明
-        </h3>
-        <p class="prompt-description">
-          複雑な科学現象を子供にもわかりやすく説明する技術を学びます。
-        </p>
-        <div class="copy-container">
-          <div class="prompt-text" id="prompt12">空が青い理由を3歳児がわかるように説明して</div>
-          <button class="copy-btn" id="btn12" onclick="copyToClipboard('prompt12', 'btn12')">📋 プロンプトをコピー</button>
-        </div>
-      </div>
-
-      <div class="prompt-card">
         <div class="tag">生活・料理</div>
         <h3>
-          <span class="icon">⚡</span>
-          時短レシピ提案
+          <span class="icon">🍽️</span>
+          2-1. 夕食メニュー＆買い物リスト
         </h3>
         <p class="prompt-description">
-          業務スーパーの冷凍野菜を活用した電子レンジ調理レシピを提案します。
+          在庫食材と家族構成を考慮して、夕食メニュー案3つと必要な買い物リストを作成します。
         </p>
         <div class="copy-container">
-          <div class="prompt-text" id="prompt13">業務スーパーの冷凍野菜を使って電子レンジで作れる時短レシピを提案して</div>
-          <button class="copy-btn" id="btn13" onclick="copyToClipboard('prompt13', 'btn13')">📋 プロンプトをコピー</button>
+          <div class="prompt-text" id="prompt4">【ペルソナ設定】
+あなたは「家庭の料理プランナー」です。
+【ステップ1】
+次の在庫食材と家族構成を読み取り、
+【ステップ2】
+・4人家族向けの夕食メニュー案を3つ
+・各メニューに必要な買い物リスト
+を箇条書きで作成してください。
+―――
+【在庫食材】
+– ブロッコリー
+– 玉ねぎ
+– ジャガイモ
+– 牛乳500ml（賞味期限当日）
+【家族構成】
+大人2人・幼児2人
+―――</div>
+          <button class="copy-btn" id="btn4" onclick="copyToClipboard('prompt4', 'btn4')">📋 プロンプトをコピー</button>
+        </div>
+      </div>
+
+      <div class="prompt-card">
+        <div class="tag">家計管理</div>
+        <h3>
+          <span class="icon">💰</span>
+          2-2. 家計支出 サマリー＆節約案
+        </h3>
+        <p class="prompt-description">
+          家計支出データを分析し、支出上位3項目に対する節約アイデアを各3案ずつ提案します。
+        </p>
+        <div class="copy-container">
+          <div class="prompt-text" id="prompt5">【ペルソナ設定】
+あなたは「家計コンサルタント」です。
+【ステップ1】
+以下の先月支出データを読み込み、
+【ステップ2】
+– 支出の多い上位3項目
+– 各項目に対する節約アイデア（3案ずつ）
+を箇条書きで出力してください。
+―――
+【支出データ】
+– 光熱費：15,000円
+– 食費：45,000円
+– 交通費：10,000円
+– 娯楽費：12,000円
+– 雑費：8,000円
+―――</div>
+          <button class="copy-btn" id="btn5" onclick="copyToClipboard('prompt5', 'btn5')">📋 プロンプトをコピー</button>
+        </div>
+      </div>
+
+      <div class="prompt-card">
+        <div class="tag">コミュニケーション</div>
+        <h3>
+          <span class="icon">💬</span>
+          2-3. 友人へのLINE日程返信（私用）
+        </h3>
+        <p class="prompt-description">
+          友人からの日程提案に対して、気遣いのあるLINE調の返信メッセージを作成します。
+        </p>
+        <div class="copy-container">
+          <div class="prompt-text" id="prompt6">【ペルソナ設定】
+あなたは「親しい友人とのコミュニケーション上手」です。
+【ステップ1】
+以下のメッセージを受け取り、
+【ステップ2】
+– 日程候補を3つ（曜日含む）
+– 相手を気遣う文言
+– 「楽しみにしてるね！」で締め
+をLINE調で作成してください。
+【相手メッセージ】
+「今週末ランチ行かない？土日空いてるよ」</div>
+          <button class="copy-btn" id="btn6" onclick="copyToClipboard('prompt6', 'btn6')">📋 プロンプトをコピー</button>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="section-title">🧠 実践セッション3：思考の整理</h2>
+
+    <div class="prompts-grid">
+      <div class="prompt-card">
+        <div class="tag">タイムマネジメント</div>
+        <h3>
+          <span class="icon">⚡</span>
+          3-1. 優先順位マトリクス 自動化
+        </h3>
+        <p class="prompt-description">
+          複数のタスクを重要度×緊急度で4象限に分類し、効率的な時間管理をサポートします。
+        </p>
+        <div class="copy-container">
+          <div class="prompt-text" id="prompt7">【ペルソナ設定】
+あなたは「タイムマネジメントコーチ」です。
+【ステップ1】
+以下のタスク一覧を受け取り、
+【ステップ2】
+「重要度×緊急度」で4象限に分類したマトリクスを表で作成。
+【タスク一覧】
+– 提案資料作成（期限：7/4）
+– トライアル課題調査（期限：明日）
+– 後輩相談対応（相談内容未確認）
+– 16時退社必須</div>
+          <button class="copy-btn" id="btn7" onclick="copyToClipboard('prompt7', 'btn7')">📋 プロンプトをコピー</button>
+        </div>
+      </div>
+
+      <div class="prompt-card">
+        <div class="tag">アイデア発想</div>
+        <h3>
+          <span class="icon">💡</span>
+          3-2. ブレインストーミング 10案抽出
+        </h3>
+        <p class="prompt-description">
+          指定されたテーマについて斬新なアイデアを10案生成し、各案にアドバイスを添えます。
+        </p>
+        <div class="copy-container">
+          <div class="prompt-text" id="prompt8">【ペルソナ設定】
+あなたは「クリエイティブファシリテーター」です。
+【ステップ1】
+次のテーマについて、
+【ステップ2】
+・斬新なアイデアを10案
+・各案に一言アドバイス
+を箇条書きで提案してください。
+【テーマ】
+「上司依頼と提案資料作成を同時並行で進める方法」</div>
+          <button class="copy-btn" id="btn8" onclick="copyToClipboard('prompt8', 'btn8')">📋 プロンプトをコピー</button>
+        </div>
+      </div>
+
+      <div class="prompt-card">
+        <div class="tag">実行計画</div>
+        <h3>
+          <span class="icon">🎯</span>
+          3-3. 実行プラン 3段階設定
+        </h3>
+        <p class="prompt-description">
+          複数のタスクを時間軸で3段階に整理し、具体的な実行プランを作成します。
+        </p>
+        <div class="copy-container">
+          <div class="prompt-text" id="prompt9">【ペルソナ設定】
+あなたは「アクションプラン作成のプロ」です。
+【ステップ1】
+以下の状況を受け取り、
+【ステップ2】
+– 即時対応プラン（今すぐできること）
+– 中期プラン（1–3時間で終わること）
+– 長期プラン（本日退社後に準備すること）
+を3段階に整理して提示してください。
+【状況】
+1. 〇〇提案資料作成中
+2. ■■課題調査（〆切：明日）
+3. 後輩相談依頼あり
+4. 本日16時退社必須</div>
+          <button class="copy-btn" id="btn9" onclick="copyToClipboard('prompt9', 'btn9')">📋 プロンプトをコピー</button>
         </div>
       </div>
     </div>

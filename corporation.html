@@ -448,20 +448,95 @@
       </div>
     </div>
 
-    <h2 class="section-title">🏠 実践セッション2：日常効率化</h2>
+    <h2 class="section-title">🧠 実践セッション2：思考の整理</h2>
+
+    <div class="prompts-grid">
+      <div class="prompt-card">
+        <div class="tag">タイムマネジメント</div>
+        <h3>
+          <span class="icon">⚡</span>
+          2-1. 優先順位マトリクス 自動化
+        </h3>
+        <p class="prompt-description">
+          複数のタスクを重要度×緊急度で4象限に分類し、効率的な時間管理をサポートします。
+        </p>
+        <div class="copy-container">
+          <div class="prompt-text" id="prompt4">【ペルソナ設定】
+あなたは「タイムマネジメントコーチ」です。
+【ステップ1】
+以下のタスク一覧を受け取り、
+【ステップ2】
+「重要度×緊急度」で4象限に分類したマトリクスを表で作成。
+【タスク一覧】
+– 提案資料作成（期限：7/4）
+– トライアル課題調査（期限：明日）
+– 後輩相談対応（相談内容未確認）
+– 16時退社必須</div>
+          <button class="copy-btn" id="btn4" onclick="copyToClipboard('prompt4', 'btn4')">📋 プロンプトをコピー</button>
+        </div>
+      </div>
+
+      <div class="prompt-card">
+        <div class="tag">アイデア発想</div>
+        <h3>
+          <span class="icon">💡</span>
+          2-2. ブレインストーミング 10案抽出
+        </h3>
+        <p class="prompt-description">
+          指定されたテーマについて斬新なアイデアを10案生成し、各案にアドバイスを添えます。
+        </p>
+        <div class="copy-container">
+          <div class="prompt-text" id="prompt5">【ペルソナ設定】
+あなたは「クリエイティブファシリテーター」です。
+【ステップ1】
+次のテーマについて、
+【ステップ2】
+・斬新なアイデアを10案
+・各案に一言アドバイス
+を箇条書きで提案してください。
+【テーマ】
+「上司依頼と提案資料作成を同時並行で進める方法」</div>
+          <button class="copy-btn" id="btn5" onclick="copyToClipboard('prompt5', 'btn5')">📋 プロンプトをコピー</button>
+        </div>
+      </div>
+
+      <div class="prompt-card">
+        <div class="tag">問題解決</div>
+        <h3>
+          <span class="icon">🔍</span>
+          2-3. 問題解決コーチ
+        </h3>
+        <p class="prompt-description">
+          「なぜ？」を5回繰り返して根本原因を特定し、真の課題解決につなげます。
+        </p>
+        <div class="copy-container">
+          <div class="prompt-text" id="prompt6">【ペルソナ】問題解決コーチ
+以下の課題について、
+①「なぜ？」を5回繰り返して問いかけ、
+②各ステップの回答から根本原因を抽出し、
+最後に「真因」としてまとめてください。
+
+【課題を内容を入力してください】
+今部署において障害対応や顧客対応が立て続いており毎日メンバーの残業時間が３時間以上の状況となっている。</div>
+          <button class="copy-btn" id="btn6" onclick="copyToClipboard('prompt6', 'btn6')">📋 プロンプトをコピー</button>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="section-title">🏠 実践セッション3：日常効率化</h2>
 
     <div class="prompts-grid">
       <div class="prompt-card">
         <div class="tag">生活・料理</div>
         <h3>
           <span class="icon">🍽️</span>
-          2-1. 夕食メニュー＆買い物リスト
+          3-1. 夕食メニュー＆買い物リスト
         </h3>
         <p class="prompt-description">
           在庫食材と家族構成を考慮して、夕食メニュー案3つと必要な買い物リストを作成します。
         </p>
         <div class="copy-container">
-          <div class="prompt-text" id="prompt4">【ペルソナ設定】
+          <div class="prompt-text" id="prompt7">【ペルソナ設定】
 あなたは「家庭の料理プランナー」です。
 【ステップ1】
 次の在庫食材と家族構成を読み取り、
@@ -478,7 +553,7 @@
 【家族構成】
 大人2人・幼児2人
 ―――</div>
-          <button class="copy-btn" id="btn4" onclick="copyToClipboard('prompt4', 'btn4')">📋 プロンプトをコピー</button>
+          <button class="copy-btn" id="btn7" onclick="copyToClipboard('prompt7', 'btn7')">📋 プロンプトをコピー</button>
         </div>
       </div>
 
@@ -486,13 +561,13 @@
         <div class="tag">家計管理</div>
         <h3>
           <span class="icon">💰</span>
-          2-2. 家計支出 サマリー＆節約案
+          3-2. 家計支出 サマリー＆節約案
         </h3>
         <p class="prompt-description">
           家計支出データを分析し、支出上位3項目に対する節約アイデアを各3案ずつ提案します。
         </p>
         <div class="copy-container">
-          <div class="prompt-text" id="prompt5">【ペルソナ設定】
+          <div class="prompt-text" id="prompt8">【ペルソナ設定】
 あなたは「家計コンサルタント」です。
 【ステップ1】
 以下の先月支出データを読み込み、
@@ -508,7 +583,7 @@
 – 娯楽費：12,000円
 – 雑費：8,000円
 ―――</div>
-          <button class="copy-btn" id="btn5" onclick="copyToClipboard('prompt5', 'btn5')">📋 プロンプトをコピー</button>
+          <button class="copy-btn" id="btn8" onclick="copyToClipboard('prompt8', 'btn8')">📋 プロンプトをコピー</button>
         </div>
       </div>
 
@@ -516,13 +591,13 @@
         <div class="tag">コミュニケーション</div>
         <h3>
           <span class="icon">💬</span>
-          2-3. 友人へのLINE日程返信（私用）
+          3-3. 友人へのLINE日程返信（私用）
         </h3>
         <p class="prompt-description">
           友人からの日程提案に対して、気遣いのあるLINE調の返信メッセージを作成します。
         </p>
         <div class="copy-container">
-          <div class="prompt-text" id="prompt6">【ペルソナ設定】
+          <div class="prompt-text" id="prompt9">【ペルソナ設定】
 あなたは「親しい友人とのコミュニケーション上手」です。
 【ステップ1】
 以下のメッセージを受け取り、
@@ -533,81 +608,6 @@
 をLINE調で作成してください。
 【相手メッセージ】
 「今週末ランチ行かない？土日空いてるよ」</div>
-          <button class="copy-btn" id="btn6" onclick="copyToClipboard('prompt6', 'btn6')">📋 プロンプトをコピー</button>
-        </div>
-      </div>
-    </div>
-
-    <h2 class="section-title">🧠 実践セッション3：思考の整理</h2>
-
-    <div class="prompts-grid">
-      <div class="prompt-card">
-        <div class="tag">タイムマネジメント</div>
-        <h3>
-          <span class="icon">⚡</span>
-          3-1. 優先順位マトリクス 自動化
-        </h3>
-        <p class="prompt-description">
-          複数のタスクを重要度×緊急度で4象限に分類し、効率的な時間管理をサポートします。
-        </p>
-        <div class="copy-container">
-          <div class="prompt-text" id="prompt7">【ペルソナ設定】
-あなたは「タイムマネジメントコーチ」です。
-【ステップ1】
-以下のタスク一覧を受け取り、
-【ステップ2】
-「重要度×緊急度」で4象限に分類したマトリクスを表で作成。
-【タスク一覧】
-– 提案資料作成（期限：7/4）
-– トライアル課題調査（期限：明日）
-– 後輩相談対応（相談内容未確認）
-– 16時退社必須</div>
-          <button class="copy-btn" id="btn7" onclick="copyToClipboard('prompt7', 'btn7')">📋 プロンプトをコピー</button>
-        </div>
-      </div>
-
-      <div class="prompt-card">
-        <div class="tag">アイデア発想</div>
-        <h3>
-          <span class="icon">💡</span>
-          3-2. ブレインストーミング 10案抽出
-        </h3>
-        <p class="prompt-description">
-          指定されたテーマについて斬新なアイデアを10案生成し、各案にアドバイスを添えます。
-        </p>
-        <div class="copy-container">
-          <div class="prompt-text" id="prompt8">【ペルソナ設定】
-あなたは「クリエイティブファシリテーター」です。
-【ステップ1】
-次のテーマについて、
-【ステップ2】
-・斬新なアイデアを10案
-・各案に一言アドバイス
-を箇条書きで提案してください。
-【テーマ】
-「上司依頼と提案資料作成を同時並行で進める方法」</div>
-          <button class="copy-btn" id="btn8" onclick="copyToClipboard('prompt8', 'btn8')">📋 プロンプトをコピー</button>
-        </div>
-      </div>
-
-      <div class="prompt-card">
-        <div class="tag">問題解決</div>
-        <h3>
-          <span class="icon">🔍</span>
-          3-3. 問題解決コーチ
-        </h3>
-        <p class="prompt-description">
-          「なぜ？」を5回繰り返して根本原因を特定し、真の課題解決につなげます。
-        </p>
-        <div class="copy-container">
-          <div class="prompt-text" id="prompt9">【ペルソナ】問題解決コーチ
-以下の課題について、
-①「なぜ？」を5回繰り返して問いかけ、
-②各ステップの回答から根本原因を抽出し、
-最後に「真因」としてまとめてください。
-
-【課題を内容を入力してください】
-今部署において障害対応や顧客対応が立て続いており毎日メンバーの残業時間が３時間以上の状況となっている。</div>
           <button class="copy-btn" id="btn9" onclick="copyToClipboard('prompt9', 'btn9')">📋 プロンプトをコピー</button>
         </div>
       </div>

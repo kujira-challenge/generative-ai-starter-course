@@ -13,10 +13,10 @@
       --bg-color: #f4f6f8;
       --card-bg: #ffffff;
       
-      /* NG例用のカラー定義 */
-      --ng-color: #d32f2f;
-      --ng-bg: #fff8f8;
-      --ng-border: #ffcdd2;
+      /* 一般的な例（比較用）のスタイル定義 */
+      --general-color: #616161; /* ニュートラルなグレー */
+      --general-bg: #f5f5f5;    /* 薄いグレー背景 */
+      --general-border: #d0d0d0;
     }
 
     * {
@@ -117,27 +117,27 @@
       box-shadow: 0 8px 20px rgba(0,0,0,0.08);
     }
     
-    /* NGカード用のスタイル追加 */
-    .prompt-card.ng-card {
-      background-color: var(--ng-bg);
-      border: 1px solid var(--ng-border);
+    /* 一般的な例（general-card）用のスタイル */
+    .prompt-card.general-card {
+      background-color: var(--general-bg);
+      border: 1px solid var(--general-border);
     }
     
-    .prompt-card.ng-card .card-title {
-      color: var(--ng-color);
+    .prompt-card.general-card .card-title {
+      color: var(--general-color);
     }
     
-    .prompt-card.ng-card .tag {
-      background-color: #ffebee;
-      color: var(--ng-color);
+    .prompt-card.general-card .tag {
+      background-color: #e0e0e0;
+      color: var(--general-color);
     }
     
-    .prompt-card.ng-card .copy-btn {
-      background-color: var(--ng-color);
+    .prompt-card.general-card .copy-btn {
+      background-color: var(--general-color);
     }
     
-    .prompt-card.ng-card .copy-btn:hover {
-      background-color: #b71c1c;
+    .prompt-card.general-card .copy-btn:hover {
+      background-color: #424242;
     }
 
     .card-header {
@@ -249,16 +249,16 @@
 
     <h2 class="section-title">📝 Section 1: 企画書・テキスト作成</h2>
 
-    <div class="prompt-card ng-card">
+    <div class="prompt-card general-card">
       <div class="card-header">
-        <div class="card-title">🙅‍♂️ 悪いプロンプト例：丸投げ</div>
-        <span class="tag">NG</span>
+        <div class="card-title">🤔 一般的なプロンプト例：ざっくり指示</div>
+        <span class="tag">Before</span>
       </div>
-      <p class="card-desc">コンテキスト（背景・目的・制約）を与えず、曖昧な言葉だけで指示した例。これではAIは「一般的な正論」しか返せず、クライアントの心に響く鋭い提案にはなりません。</p>
+      <p class="card-desc">日常的によく使われるシンプルな指示です。これでも回答は作成されますが、詳細な背景がないため、AIは「無難で一般的な正論」を返す傾向があります。</p>
       <div class="prompt-area">
-        <div class="prompt-text" id="p_ng">A株式会社（大手）向けに、50代社員向けのキャリア研修の企画書を作ってください。
+        <div class="prompt-text" id="p_general">A株式会社（大手）向けに、50代社員向けのキャリア研修の企画書を作ってください。
 現状、あまり元気がない人が多いので、やる気が出るような内容で、いい感じの提案にお願いします。</div>
-        <button class="copy-btn" onclick="copyToClipboard('p_ng', this)">📋 悪いプロンプトをコピー（比較用）</button>
+        <button class="copy-btn" onclick="copyToClipboard('p_general', this)">📋 一般的なプロンプトをコピー（比較用）</button>
       </div>
     </div>
 
@@ -267,7 +267,7 @@
         <div class="card-title">🏆 1-1. 「勝てる」企画書作成</div>
         <span class="tag">本日の目玉</span>
       </div>
-      <p class="card-desc">トップコンサルタントの思考プロセスを再現し、論理的で説得力のある提案書ドラフトを一発で生成します。上のNG例との出力の差を比べてみてください。</p>
+      <p class="card-desc">トップコンサルタントの思考プロセスを再現し、論理的で説得力のある提案書ドラフトを一発で生成します。上の一般的な例との出力の差を比べてみてください。</p>
       <div class="prompt-area">
         <div class="prompt-text" id="p2">前提条件
 あなたは、論理的思考力と人間心理への深い洞察を兼ね備えた「トップコンサルタント兼凄腕の企画担当者」です。

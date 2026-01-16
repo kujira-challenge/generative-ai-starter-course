@@ -12,6 +12,11 @@
       --text-color: #333333;
       --bg-color: #f4f6f8;
       --card-bg: #ffffff;
+      
+      /* NG例用のカラー定義 */
+      --ng-color: #d32f2f;
+      --ng-bg: #fff8f8;
+      --ng-border: #ffcdd2;
     }
 
     * {
@@ -111,6 +116,29 @@
       transform: translateY(-2px);
       box-shadow: 0 8px 20px rgba(0,0,0,0.08);
     }
+    
+    /* NGカード用のスタイル追加 */
+    .prompt-card.ng-card {
+      background-color: var(--ng-bg);
+      border: 1px solid var(--ng-border);
+    }
+    
+    .prompt-card.ng-card .card-title {
+      color: var(--ng-color);
+    }
+    
+    .prompt-card.ng-card .tag {
+      background-color: #ffebee;
+      color: var(--ng-color);
+    }
+    
+    .prompt-card.ng-card .copy-btn {
+      background-color: var(--ng-color);
+    }
+    
+    .prompt-card.ng-card .copy-btn:hover {
+      background-color: #b71c1c;
+    }
 
     .card-header {
       display: flex;
@@ -183,7 +211,7 @@
     }
 
     .copy-btn.copied {
-      background-color: #28a745; /* 成功時の緑 */
+      background-color: #28a745 !important; /* 成功時の緑 */
     }
 
     /* フッター */
@@ -221,33 +249,25 @@
 
     <h2 class="section-title">📝 Section 1: 企画書・テキスト作成</h2>
 
-    <div class="prompt-card">
+    <div class="prompt-card ng-card">
       <div class="card-header">
-        <div class="card-title">🤖 1-1. 指示書作成ボット</div>
-        <span class="tag">初級〜中級</span>
+        <div class="card-title">🙅‍♂️ 悪いプロンプト例：丸投げ</div>
+        <span class="tag">NG</span>
       </div>
-      <p class="card-desc">「どう指示すればいいかわからない」という時はこれ。AIがあなたにインタビューして、最適なプロンプトを作ってくれます。</p>
+      <p class="card-desc">コンテキスト（背景・目的・制約）を与えず、曖昧な言葉だけで指示した例。これではAIは「一般的な正論」しか返せず、クライアントの心に響く鋭い提案にはなりません。</p>
       <div class="prompt-area">
-        <div class="prompt-text" id="p1">あなたは世界最高峰のプロンプトエンジニアです。
-私の要望を聞き出し、Geminiに対して最高のパフォーマンスを発揮させるための「完璧な指示書（プロンプト）」を作成してください。
-
-手順は以下の通りです。
-
-1. まず、私に「どのようなタスクを行いたいですか？」と聞いてください。
-2. 私の回答に基づき、より良い成果物を出すために必要な情報（ターゲット、背景、制約条件、出力形式など）を不足なく私に質問してください（最大5問まで）。
-3. 私が質問に答えたら、それらすべての情報を統合し、そのままGeminiにコピペして使える「完成版プロンプト」を出力してください。
-
-それでは、手順1から始めてください。</div>
-        <button class="copy-btn" onclick="copyToClipboard('p1', this)">📋 プロンプトをコピー</button>
+        <div class="prompt-text" id="p_ng">A株式会社（大手）向けに、50代社員向けのキャリア研修の企画書を作ってください。
+現状、あまり元気がない人が多いので、やる気が出るような内容で、いい感じの提案にお願いします。</div>
+        <button class="copy-btn" onclick="copyToClipboard('p_ng', this)">📋 悪いプロンプトをコピー（比較用）</button>
       </div>
     </div>
 
     <div class="prompt-card">
       <div class="card-header">
-        <div class="card-title">🏆 1-2. 「勝てる」企画書作成</div>
+        <div class="card-title">🏆 1-1. 「勝てる」企画書作成</div>
         <span class="tag">本日の目玉</span>
       </div>
-      <p class="card-desc">トップコンサルタントの思考プロセスを再現し、論理的で説得力のある提案書ドラフトを一発で生成します。入力情報を書き換えてご使用ください。</p>
+      <p class="card-desc">トップコンサルタントの思考プロセスを再現し、論理的で説得力のある提案書ドラフトを一発で生成します。上のNG例との出力の差を比べてみてください。</p>
       <div class="prompt-area">
         <div class="prompt-text" id="p2">前提条件
 あなたは、論理的思考力と人間心理への深い洞察を兼ね備えた「トップコンサルタント兼凄腕の企画担当者」です。
@@ -337,6 +357,27 @@
 ・読み手（決裁者）が社内説明しやすいよう、論理の飛躍をなくすこと。
 ・架空のデータや事例を用いる場合は、そのテーマにおいて「ありそう（もっともらしい）」で説得力のある数値を設定すること。</div>
         <button class="copy-btn" onclick="copyToClipboard('p2', this)">📋 プロンプトをコピー</button>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="card-header">
+        <div class="card-title">🤖 1-2. 指示書作成ボット</div>
+        <span class="tag">初級〜中級</span>
+      </div>
+      <p class="card-desc">「どう指示すればいいかわからない」という時はこれ。AIがあなたにインタビューして、最適なプロンプトを作ってくれます。</p>
+      <div class="prompt-area">
+        <div class="prompt-text" id="p1">あなたは世界最高峰のプロンプトエンジニアです。
+私の要望を聞き出し、Geminiに対して最高のパフォーマンスを発揮させるための「完璧な指示書（プロンプト）」を作成してください。
+
+手順は以下の通りです。
+
+1. まず、私に「どのようなタスクを行いたいですか？」と聞いてください。
+2. 私の回答に基づき、より良い成果物を出すために必要な情報（ターゲット、背景、制約条件、出力形式など）を不足なく私に質問してください（最大5問まで）。
+3. 私が質問に答えたら、それらすべての情報を統合し、そのままGeminiにコピペして使える「完成版プロンプト」を出力してください。
+
+それでは、手順1から始めてください。</div>
+        <button class="copy-btn" onclick="copyToClipboard('p1', this)">📋 プロンプトをコピー</button>
       </div>
     </div>
 

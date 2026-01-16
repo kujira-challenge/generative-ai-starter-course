@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生成AI活用研修 Day 1 - 実践プロンプト集</title>
+  <style>
+    :root {
+      --primary-color: #0052cc; /* 信頼感のあるビジネスブルー */
+      --secondary-color: #003366; /* 濃いネイビー */
+      --accent-color: #e6f0ff; /* 淡いブルーの背景 */
+      --text-color: #333333;
+      --bg-color: #f4f6f8;
+      --card-bg: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    /* ヘッダー */
+    .header {
+      background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .header h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .header p {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
+    /* コンテナ */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    /* 導入メッセージ */
+    .intro-box {
+      background: white;
+      border-left: 5px solid var(--primary-color);
+      padding: 25px;
+      border-radius: 8px;
+      margin-bottom: 40px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+
+    .intro-box h2 {
+      font-size: 1.4rem;
+      color: var(--secondary-color);
+      margin-bottom: 15px;
+    }
+
+    .intro-box p {
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+
+    .highlight-msg {
+      background-color: var(--accent-color);
+      padding: 15px;
+      border-radius: 6px;
+      font-weight: bold;
+      color: var(--secondary-color);
+      margin-top: 15px;
+    }
+
+    /* セクションタイトル */
+    .section-title {
+      font-size: 1.5rem;
+      color: var(--secondary-color);
+      margin: 50px 0 20px 0;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #dde2e6;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* プロンプトカード */
+    .prompt-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      border: 1px solid #e1e4e8;
+      transition: transform 0.2s ease;
+    }
+
+    .prompt-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tag {
+      background-color: var(--accent-color);
+      color: var(--primary-color);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .card-desc {
+      font-size: 0.95rem;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    /* プロンプト表示エリア */
+    .prompt-area {
+      position: relative;
+    }
+
+    .prompt-text {
+      font-family: "Consolas", "Monaco", monospace;
+      background-color: #f8f9fa;
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      font-size: 0.9rem;
+      color: #444;
+      white-space: pre-wrap;
+      max-height: 300px;
+      overflow-y: auto;
+      margin-bottom: 15px;
+    }
+
+    /* コピーボタン */
+    .copy-btn {
+      display: block;
+      width: 100%;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      text-align: center;
+    }
+
+    .copy-btn:hover {
+      background-color: var(--secondary-color);
+    }
+
+    .copy-btn.copied {
+      background-color: #28a745; /* 成功時の緑 */
+    }
+
+    /* フッター */
+    .footer {
+      text-align: center;
+      padding: 40px;
+      color: #888;
+      font-size: 0.9rem;
+    }
+
+    /* レスポンシブ */
+    @media (max-width: 768px) {
+      .header h1 { font-size: 1.5rem; }
+      .prompt-card { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <h1>生成AI活用研修 Day 1</h1>
+    <p>アウトプット革命：実践ワークショップ補助ツール</p>
+  </header>
+
+  <div class="container">
+
+    <div class="intro-box">
+      <h2>👋 はじめに：まずは「慣れる」ことから</h2>
+      <p>本日は高度なテクニックもご紹介しますが、最初から完璧を目指す必要はありません。</p>
+      <p>日常業務では「メールの返信案を書いて」「この用語を解説して」といった、<strong>1行の指示（プロンプト）でも十分役立ちます。</strong></p>
+      <div class="highlight-msg">
+        💡 まずはAIに「雑に投げる」ことから始めましょう。そして「もっと品質を上げたい！」と思った時に、このページにあるプロンプトを活用してください。
+      </div>
+    </div>
+
+    <h2 class="section-title">📝 Section 1: 企画書・テキスト作成</h2>
+
+    <div class="prompt-card">
+      <div class="card-header">
+        <div class="card-title">🤖 1-1. 指示書作成ボット</div>
+        <span class="tag">初級〜中級</span>
+      </div>
+      <p class="card-desc">「どう指示すればいいかわからない」という時はこれ。AIがあなたにインタビューして、最適なプロンプトを作ってくれます。</p>
+      <div class="prompt-area">
+        <div class="prompt-text" id="p1">あなたは世界最高峰のプロンプトエンジニアです。
+私の要望を聞き出し、Geminiに対して最高のパフォーマンスを発揮させるための「完璧な指示書（プロンプト）」を作成してください。
+
+手順は以下の通りです。
+
+1. まず、私に「どのようなタスクを行いたいですか？」と聞いてください。
+2. 私の回答に基づき、より良い成果物を出すために必要な情報（ターゲット、背景、制約条件、出力形式など）を不足なく私に質問してください（最大5問まで）。
+3. 私が質問に答えたら、それらすべての情報を統合し、そのままGeminiにコピペして使える「完成版プロンプト」を出力してください。
+
+それでは、手順1から始めてください。</div>
+        <button class="copy-btn" onclick="copyToClipboard('p1', this)">📋 プロンプトをコピー</button>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="card-header">
+        <div class="card-title">🏆 1-2. 「勝てる」企画書作成</div>
+        <span class="tag">本日の目玉</span>
+      </div>
+      <p class="card-desc">トップコンサルタントの思考プロセスを再現し、論理的で説得力のある提案書ドラフトを一発で生成します。入力情報を書き換えてご使用ください。</p>
+      <div class="prompt-area">
+        <div class="prompt-text" id="p2">前提条件
+あなたは、論理的思考力と人間心理への深い洞察を兼ね備えた「トップコンサルタント兼凄腕の企画担当者」です。
+以下の【入力情報】を基に、顧客の決裁者が「これなら成果が出る」と確信し、即決したくなるような【高品質な企画書（構成案と本文）】を作成してください。
+
+# 入力情報（ここが毎回変わります）
+<Client_Info>
+提案先: A株式会社（ジョブ型人事制度を導入済みの国内大手企業）
+ターゲット: 40代後半〜50代後半（ミドル・エルダー層）
+</Client_Info>
+
+<Current_Status_Pain>
+現状の課題:
+・全社で「自律型人材」の育成と「行動変容」を推進中だが、ミドル・エルダー層の行動実施率が全社平均を下回っている（他世代が70〜75%に対し、本層は60%台前半）。
+・日々の業務への忙殺、漠然とした「なりたい姿」、定年を見据えたキャリア形成への難しさを感じている。
+・従来の「キャリアセミナー」への応募率は2.5%と極めて低く、キャリアという言葉に心理的障壁がある。
+</Current_Status_Pain>
+
+<Goal_Gain>
+達成したい目的:
+・ミドル・エルダー層の行動実施率を引き上げ、全社目標値である75%以上を実現する。
+・キャリアを「自分ごと」として捉え、自律的なキャリア行動（WHYの明確化）への一歩を踏み出させる。
+</Goal_Gain>
+
+<Proposed_Solution>
+解決策:
+・「ライフ・マネープランセミナー」の新設と、その後の「個別相談会」への段階的な誘致。
+・年代別の課題に合わせ、40代後半〜54歳には「職務再定義（ジョブ・クラフティング）」、56歳〜59歳には「定年という転機の乗り越え方」にフォーカスしたコンテンツを提供。
+</Proposed_Solution>
+
+<Strategic_Hook>
+ターゲットへのフック:
+・「キャリアプランとマネープランは人生設計の両輪である」。
+・関心の高い「マネー（お金）」を入り口にすることで心理的ハードルを下げ、不透明な生活経済への不安を解消しながら、結果として「稼ぎ続ける力＝キャリア」の必要性を認識させる。
+</Strategic_Hook>
+
+# 思考プロセス（従うべき論理構築手順）
+企画書を出力する前に、以下のステップで論理構築を行ってください。このプロセスは出力に含める必要はありませんが、企画書の内容に必ず反映させてください。
+
+1. 【外部環境の洞察】（Context）
+   入力された「課題」に関連する、説得力のある「市場データ」や「社会背景」を検索・推論して提示してください。（例：関連する公的機関の調査、業界トレンド、意識変容のデータなど）。
+   ※入力情報に特定のデータがない場合は、テーマに沿った最も効果的な一般的指標を仮定して用いること。
+
+2. 【内部状況の具体化】（Reality）
+   単に課題をなぞるのではなく、顧客の内部データを分析したかのような「生々しい現状認識」を作成してください。
+   ・定量的指標（エンゲージメントスコア、離職率、応募率などの具体的な数値差）
+   ・定性的声（ターゲット層が抱える本音、現場で起きている具体的な摩擦）
+
+3. 【戦略的仮説の立案】（Strategy）
+   「なぜ従来の施策ではうまくいかなかったのか」の真因を心理的・構造的に分析し、今回の「解決策（Solution）」や「フック（Hook）」がなぜ有効なのか、その「勝ち筋」を論理的に定義してください。
+
+4. 【解決策の具体化とROI】（Solution & Proof）
+   抽象的な研修や施策の提案で終わらせず、具体的な「提供価値」を描いてください。
+   ・ターゲットが手を動かす「具体的なツール」（診断シート、カード、ワークショップ形式など）のアイデアを含めること。
+   ・その施策を行うことで得られる「投資対効果（ROI）」を、コスト削減や売上向上などの数値（仮定で可）を用いて試算すること。
+
+# 出力フォーマット（勝利の構成）
+以下のスライド構成に従って、スライドごとの「タイトル」「メッセージ」「具体的な本文」を出力してください。
+
+スライド1：表紙
+・キャッチーなタイトル（ベネフィットがひと目で伝わるもの）
+・サブタイトル（ターゲットへの提供価値）
+
+スライド2-3：背景と課題分析（Why Now?）
+・外部環境と内部現状のギャップ
+・課題の深掘り（「なぜ彼らは動かないのか」の真因分析。表面的な事象ではなく、心理的・構造的障壁への洞察）
+
+スライド4：戦略的仮説（Strategy）
+・今回の戦略コンセプト（従来の失敗を覆す、新しい切り口や誘致戦略）
+・施策の全体像（BeforeからAfterへ導くためのステップや導線設計）
+
+スライド5-6：解決策の具体化（Solution）
+・ターゲット層ごとの具体的カリキュラムやコンテンツ内容
+・【重要】独自性の提示（単なる座学ではなく、提供する独自の「診断ツール」「ワークシート」「内省手法」などの具体的アイデア）
+
+スライド7：ペルソナによるシミュレーション（Story）
+・具体的なターゲット社員（年齢、役職、今の悩み）の設定
+・施策を通じた意識・行動の「Before/After」の物語（心の動きの変化を描く）
+
+スライド8：実行計画とROI（Proof）
+・スケジュール案
+・期待される定量成果（目標達成に向けたロジック）と、経営へのインパクト（ROI）
+
+# 制約事項
+・語調はプロフェッショナルかつ説得力のある「提案口調」であること（「～です・ます」調）。
+・抽象的な言葉（「意識を高める」「活性化する」）は避け、具体的な状態（「定年後の収支をシミュレーションし、今の仕事の意義を再定義する」など）で表現すること。
+・読み手（決裁者）が社内説明しやすいよう、論理の飛躍をなくすこと。
+・架空のデータや事例を用いる場合は、そのテーマにおいて「ありそう（もっともらしい）」で説得力のある数値を設定すること。</div>
+        <button class="copy-btn" onclick="copyToClipboard('p2', this)">📋 プロンプトをコピー</button>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="card-header">
+        <div class="card-title">🧬 1-3. 文体クローン生成</div>
+        <span class="tag">中級</span>
+      </div>
+      <p class="card-desc">AIの文章は「固い」「冷たい」と感じる時に。過去の資料を読み込ませることで、御社らしいトーン＆マナーを再現します。</p>
+      <div class="prompt-area">
+        <div class="prompt-text" id="p3">あなたはプロのビジネスライターです。
+以下の【参考テキスト】の「文体」「言葉の選び方」「リズム」「説得の論理構成」を分析し、そのスタイルを完全に模倣（クローン）してください。
+
+その「模倣したスタイル」を使って、以下の【新しいテーマ】についての企画書ドラフト（導入部分）を作成してください。
+
+# 参考テキスト（ここにある文章の書き味を真似てください）
+{ここに、過去の質の高い企画書や、理想とする文章のテキストデータを貼り付けてください}
+
+# 新しいテーマ（今回書きたい内容）
+{例：若手社員向けの、自律的なキャリア形成を促す半日研修の提案。ターゲットは受け身な社員が多い。}</div>
+        <button class="copy-btn" onclick="copyToClipboard('p3', this)">📋 プロンプトをコピー</button>
+      </div>
+    </div>
+
+
+    <h2 class="section-title">🎨 Section 2: 画像生成・素材作成</h2>
+    <p style="margin-bottom: 20px;">Geminiで画像を作る際、言葉だけで伝えるのが難しい場合は「コンサルタント」プロンプト（2-1）を、手早くスタイル指定したい場合はカタログ（2-2）を活用してください。</p>
+
+    <div class="prompt-card">
+      <div class="card-header">
+        <div class="card-title">🎨 2-1. 画像生成コンサルタント</div>
+        <span class="tag">推奨</span>
+      </div>
+      <p class="card-desc">「何をどう描けば伝わるか」から相談できる強力なプロンプト。抽象的なイメージを具体的な図解やビジュアル案に変換し、そのまま画像生成できる指示書を発行します。</p>
+      <div class="prompt-area">
+        <div class="prompt-text" id="p_img_consultant">あなたは、世界最高峰のアートディレクター兼・画像生成プロンプトエンジニアです。
+ユーザーが「何を伝えたいか」という抽象的な要望を聞き出し、それを最も効果的に伝えるための「ビジュアル形式（図解、イラスト、写真など）」を提案し、最終的にGemini（Imagen 3）で高品質な画像を生成するための「英語プロンプト」を作成してください。
+
+手順は以下の通りです。ステップバイステップで実行してください。
+
+### 手順1：ヒアリング
+まず、私に「どのようなコンセプトや情報を画像で表現したいですか？」と聞いてください。
+
+### 手順2：深堀りと提案（重要）
+私の回答に基づき、以下の3点について思考し、私に確認・提案を行ってください。ここではまだプロンプトは作りません。
+1. **情報の構造化**: 私が伝えたいことが「対比」なのか「プロセス」なのか「感情」なのかを分析してください。
+2. **最適なビジュアルの提案**: その内容を伝えるのに最も適した形式を提案してください。
+   （例：「その内容であれば、抽象的なイメージ図よりも、フローチャート風のアイソメトリックイラストが適しています」や「信頼感を出すために、温かみのある実写風ポートレートが良いでしょう」など）
+3. **トーン＆マナーの確認**: 色味、画風（3D、手書き風、フォトリアルなど）の希望を聞いてください。
+
+### 手順3：統合と出力
+私が手順2の提案に合意、または修正指示を出したら、それらの情報を統合して、以下の形式で出力してください。
+
+---
+**【画像生成方針】**
+（今回作成する画像の狙いと、なぜこの構図・スタイルを選んだかの簡単な解説）
+
+**【画像生成用プロンプト（英語）】**
+（Gemini/Imagen 3でそのまま使える、具体的かつ高品質な英語プロンプト。アスペクト比の指定があればそれも含む）
+
+**【日本語訳】**
+（どのような画像が生成されるかの日本語での説明）
+---
+
+それでは、手順1から始めてください。</div>
+        <button class="copy-btn" onclick="copyToClipboard('p_img_consultant', this)">📋 プロンプトをコピー</button>
+      </div>
+    </div>
+    <div class="prompt-card">
+      <div class="card-header">
+        <div class="card-title">🖼️ 2-2. 画像スタイルカタログ</div>
+        <span class="tag">画像生成</span>
+      </div>
+      <p class="card-desc">用途に合わせて選んでください。<code>[ ]</code> の部分を書き換えて使用します。</p>
+      
+      <div class="prompt-area">
+        <p style="font-weight:bold; margin-bottom:5px;">A. 企画書の表紙用（3Dアイソメトリック）</p>
+        <div class="prompt-text" id="p4a">[チームワークと成長] を表現する、3Dアイソメトリックイラスト。ミニマルなデザイン、白背景、青とグレーのコーポレートカラー、文字なし。
+(3D isometric illustration representing [teamwork and growth], minimal design, white background, corporate blue and grey colors, soft lighting, high quality, no text)</div>
+        <button class="copy-btn" style="margin-bottom: 15px;" onclick="copyToClipboard('p4a', this)">📋 表紙用プロンプトをコピー</button>
+
+        <p style="font-weight:bold; margin-bottom:5px;">B. スライド挿絵用（フラットデザイン）</p>
+        <div class="prompt-text" id="p4b">[悩み考えるビジネスパーソン] のフラットなベクターイラスト。シンプル、余白多め、企業のプレゼン資料用。
+(Flat vector illustration of [a thinking business person], corporate memphis style, simple shapes, clean lines, isolated on white background, no text)</div>
+        <button class="copy-btn" style="margin-bottom: 15px;" onclick="copyToClipboard('p4b', this)">📋 挿絵用プロンプトをコピー</button>
+
+        <p style="font-weight:bold; margin-bottom:5px;">C. スライド背景用（抽象画）</p>
+        <div class="prompt-text" id="p4c">[上昇、加速、デジタル] をイメージさせる抽象的な背景画像。ボケ味、明るい、ビジネス用。
+(Abstract background image representing [rise, acceleration, digital], soft bokeh, light and airy, suitable for business presentation background)</div>
+        <button class="copy-btn" onclick="copyToClipboard('p4c', this)">📋 背景用プロンプトをコピー</button>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <p>© 2026 LW Generative AI Training - Day 1 Resources</p>
+  </footer>
+
+  <script>
+    function copyToClipboard(elementId, btnElement) {
+      // テキストを取得
+      const text = document.getElementById(elementId).innerText;
+      
+      // クリップボードにコピー
+      navigator.clipboard.writeText(text).then(function() {
+        // ボタンの見た目を変更
+        const originalText = btnElement.innerText;
+        btnElement.innerText = "✅ コピーしました！";
+        btnElement.classList.add("copied");
+
+        // 2秒後に元に戻す
+        setTimeout(function() {
+          btnElement.innerText = originalText;
+          btnElement.classList.remove("copied");
+        }, 2000);
+      }, function(err) {
+        console.error('コピーに失敗しました: ', err);
+        alert('コピーに失敗しました。手動でコピーしてください。');
+      });
+    }
+  </script>
+</body>
+</html>

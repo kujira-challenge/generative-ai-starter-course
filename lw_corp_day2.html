@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生成AI活用研修 Day 2 - 思考の質を高めるプロンプト集</title>
+  <style>
+    :root {
+      --primary-color: #0052cc; /* 信頼感のあるビジネスブルー */
+      --secondary-color: #003366; /* 濃いネイビー */
+      --accent-color: #e6f0ff; /* 淡いブルーの背景 */
+      --text-color: #333333;
+      --bg-color: #f4f6f8;
+      --card-bg: #ffffff;
+      
+      --general-color: #616161; 
+      --general-bg: #f5f5f5;    
+      --general-border: #d0d0d0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    .header {
+      background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .header h1 { font-size: 2rem; margin-bottom: 10px; font-weight: 700; }
+    .header p { font-size: 1rem; opacity: 0.9; }
+
+    .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+
+    .intro-box {
+      background: white;
+      border-left: 5px solid var(--primary-color);
+      padding: 25px;
+      border-radius: 8px;
+      margin-bottom: 40px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+
+    .intro-box h2 { font-size: 1.4rem; color: var(--secondary-color); margin-bottom: 15px; }
+
+    .highlight-msg {
+      background-color: var(--accent-color);
+      padding: 15px;
+      border-radius: 6px;
+      font-weight: bold;
+      color: var(--primary-color);
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      color: var(--secondary-color);
+      margin: 50px 0 20px 0;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #dde2e6;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .prompt-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      border: 1px solid #e1e4e8;
+      transition: transform 0.2s ease;
+    }
+
+    .prompt-card.general-card {
+      background-color: var(--general-bg);
+      border: 1px solid var(--general-border);
+    }
+
+    .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+    .card-title { font-size: 1.25rem; font-weight: bold; color: var(--primary-color); display: flex; align-items: center; gap: 8px; }
+    .tag { background-color: var(--accent-color); color: var(--primary-color); padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+    .card-desc { font-size: 0.95rem; color: #666; margin-bottom: 20px; }
+
+    .prompt-area { position: relative; }
+    .prompt-text {
+      font-family: "Consolas", "Monaco", monospace;
+      background-color: #f8f9fa;
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      font-size: 0.9rem;
+      color: #444;
+      white-space: pre-wrap;
+      max-height: 400px;
+      overflow-y: auto;
+      margin-bottom: 15px;
+    }
+
+    .copy-btn {
+      display: block; width: 100%; background-color: var(--primary-color); color: white;
+      border: none; padding: 12px; border-radius: 6px; font-size: 1rem; font-weight: 600;
+      cursor: pointer; transition: background-color 0.3s; text-align: center;
+    }
+
+    .copy-btn:hover { background-color: var(--secondary-color); }
+    .copy-btn.copied { background-color: #28a745 !important; }
+
+    .footer { text-align: center; padding: 40px; color: #888; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <h1>生成AI活用研修 Day 2</h1>
+    <p>思考の質を高める：実践ワークショップ補助ツール</p>
+  </header>
+
+  <div class="container">
+
+    <div class="intro-box">
+      <h2>👋 Day 2：思考の質を「設計」する</h2>
+      <p>本日は、AIを「答えを出す自販機」から「思考を深める参謀」へと進化させます。</p>
+      <div class="highlight-msg">
+        💡 演習の指示に合わせて、以下のプロンプトをコピーしてチャットに貼り付けてください。
+      </div>
+    </div>
+
+    <h2 class="section-title">☂️ Section 1: 情報整理（空・雨・傘）</h2>
+
+    <div class="prompt-card general-card">
+      <div class="card-header">
+        <div class="card-title">📝 1-1. 演習用ダミーメモ</div>
+        <span class="tag">コピー用テキスト</span>
+      </div>
+      <p class="card-desc">「事実」と「感想」が混ざったダメな議事録のサンプルです。これを整理してみましょう。</p>
+      <div class="prompt-area">
+        <div class="prompt-text" id="p_memo">【会議メモ：メンター制度振り返り】
+・今年のメンター制度、なんとなく盛り上がりに欠ける気がする。
+・アンケートの満足度は5点満点中3.2点だった。去年は3.8点。
+・メンター（先輩）側から「業務が忙しくて面談時間が取れない」という声が3件あった。
+・やっぱり若手もリモートワークが増えてるから、関係性が作りにくいんじゃないか？
+・他社の事例だと、ランチ代を補助すると会話が増えるらしいよ。
+・メンティー（若手）の離職率は今のところ横ばい。
+・制度自体を廃止するのは違うと思うけど、形骸化してるなら変える必要あり。
+・人事部の担当者が来月から1名減る予定。
+・とりあえず、もっとメンターに「ちゃんとやって」ってアナウンスしようか。</div>
+        <button class="copy-btn" onclick="copyToClipboard('p_memo', this)">📋 メモをコピー</button>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="card-header">
+        <div class="card-title">✨ 1-2. 空・雨・傘プロンプト</div>
+        <span class="tag">整理・構造化</span>
+      </div>
+      <div class="prompt-area">
+        <div class="prompt-text" id="p_sorame"># 命令
+以下の【テキスト】を読み込み、マッキンゼーの「空・雨・傘」のフレームワークを用いて情報を整理・構造化してください。
+
+# 制約条件
+1. **空（事実）：** テキストに書かれている客観的な事実・データのみを抜き出すこと。ここにあなたの意見や推測を入れてはいけません。
+2. **雨（解釈）：** 「空」の事実から読み取れる真の課題、リスク、または洞察を記述すること。
+3. **傘（行動）：** 「雨」の解釈に基づき、具体的に取るべきアクションや提案を記述すること。
+
+# テキスト
+[ここにさっきの「ダミーメモ」を貼り付けてください]</div>
+        <button class="copy-btn" onclick="copyToClipboard('p_sorame', this)">📋 プロンプトをコピー</button>
+      </div>
+    </div>
+
+    <h2 class="section-title">🧠 Section 2: 思考の深掘り</h2>
+
+    <div class="prompt-card">
+      <div class="card-header">
+        <div class="card-title">🧙‍♂️ 2-1. 3人の賢者 (Step 1)</div>
+        <span class="tag">発散・多角化</span>
+      </div>
+      <div class="prompt-area">
+        <div class="prompt-text" id="p_3wisemen"># 命令
+あなたは優秀なビジネス参謀です。以下の【課題】について、異なる3つの視点（ロール）から議論を行い、解決策のアイデアを出してください。
+
+# 3つの視点
+1. **経営戦略家：** コスト対効果（ROI）と長期的利益を最優先する視点
+2. **現場リーダー：** 実行可能性と現場メンバーの負担軽減を最優先する視点
+3. **顧客心理の専門家：** ユーザー（または従業員）の感情と満足度を最優先する視点
+
+# 課題
+[ここにあなたの解決したい課題を入力]
+
+# 出力形式
+それぞれの視点からの意見と、それらを統合した初期アイデアを出力してください。</div>
+        <button class="copy-btn" onclick="copyToClipboard('p_3wisemen', this)">📋 プロンプトをコピー</button>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="card-header">
+        <div class="card-title">🪞 2-2. 自己推敲 (Step 2)</div>
+        <span class="tag">収束・品質向上</span>
+      </div>
+      <p class="card-desc"><strong>※Step 1の出力後、同じチャットで入力してください。</strong></p>
+      <div class="prompt-area">
+        <div class="prompt-text" id="p_reflection"># 命令
+ありがとうございます。提示された「初期アイデア」に対して、批判的なレビュー（ダメ出し）を行ってください。
+
+# レビューの視点
+* 論理の飛躍はないか？
+* コストやリソースの観点で現実的か？
+* 新たなリスク（副作用）はないか？
+
+# 最終出力
+上記の批判を踏まえ、弱点を補強した「ブラッシュアップ版の解決策」を提示してください。</div>
+        <button class="copy-btn" onclick="copyToClipboard('p_reflection', this)">📋 プロンプトをコピー</button>
+      </div>
+    </div>
+
+    <h2 class="section-title">📐 Section 3: 物語の構成（S-C-Q-A）</h2>
+
+    <div class="prompt-card">
+      <div class="card-header">
+        <div class="card-title">📊 3. S-C-Q-Aプロンプト</div>
+        <span class="tag">提案・ストーリー</span>
+      </div>
+      <div class="prompt-area">
+        <div class="prompt-text" id="p_scqa"># 命令
+これまでの検討内容をもとに、上司に提案するための資料構成案を作成してください。
+「S-C-Q-A」モデルを使用し、読み手が自然と納得するストーリーにしてください。
+
+# S-C-Q-Aの定義
+* **S (Situation - 状況)：** 読み手が既に知っており、合意できる背景事実。
+* **C (Complication - 複雑化)：** Sの中で起きている問題、変化、困りごと。
+* **Q (Question - 問い)：** Cを解決するために、今答えるべき論点。
+* **A (Answer - 答え)：** Qに対する核心的な解決策（今回の提案）。
+
+# 出力形式
+スライドの構成案として出力してください。</div>
+        <button class="copy-btn" onclick="copyToClipboard('p_scqa', this)">📋 プロンプトをコピー</button>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <p>© 2026 LW Generative AI Training - Day 2 Resources</p>
+  </footer>
+
+  <script>
+    function copyToClipboard(elementId, btnElement) {
+      const text = document.getElementById(elementId).innerText;
+      navigator.clipboard.writeText(text).then(function() {
+        const originalText = btnElement.innerText;
+        btnElement.innerText = "✅ コピーしました！";
+        btnElement.classList.add("copied");
+        setTimeout(function() {
+          btnElement.innerText = originalText;
+          btnElement.classList.remove("copied");
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>

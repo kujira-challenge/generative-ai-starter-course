@@ -1,20 +1,26 @@
 <!DOCTYPE html>
-<!-- saved from url=(0081)https://kujira-challenge.github.io/generative-ai-starter-course/lw_corp_day3.html -->
-<html lang="ja"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>生成AI活用研修 Day 3 - 実装・業務自動化ブートキャンプ</title>
   <style>
     :root {
       /* Day 3 カラーテーマ */
-      --primary-color: #2c3e50;
-      --secondary-color: #4a148c;
-      --accent-color: #f3e5f5;
+      --primary-color: #2c3e50; /* ネイビー */
+      --secondary-color: #4a148c; /* パープル */
+      --accent-color: #f3e5f5; /* 背景用薄紫 */
       --text-color: #333333;
       --bg-color: #f4f6f8;
       --card-bg: #ffffff;
-      --btn-primary: #0056b3;
-      --btn-hover: #004494;
+      
+      /* ボタン色 */
+      --btn-primary-bg: #2c3e50;
+      --btn-primary-hover: #1a252f;
+      --btn-success-bg: #27ae60;
+      --btn-success-hover: #219150;
+      --btn-download-bg: #0056b3;
+      
       --warning-bg: #fff3cd;
       --warning-text: #856404;
     }
@@ -28,6 +34,7 @@
       line-height: 1.6;
     }
 
+    /* ヘッダー */
     .header {
       background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
       color: white;
@@ -39,6 +46,7 @@
 
     .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
 
+    /* イントロダクション */
     .intro-box {
       background: white;
       border-left: 5px solid var(--secondary-color);
@@ -48,6 +56,7 @@
       box-shadow: 0 4px 6px rgba(0,0,0,0.05);
     }
 
+    /* セクション見出し */
     .section-title {
       font-size: 1.5rem;
       color: var(--primary-color);
@@ -59,6 +68,7 @@
       gap: 10px;
     }
 
+    /* カードデザイン */
     .card {
       background: var(--card-bg);
       border-radius: 12px;
@@ -67,7 +77,6 @@
       box-shadow: 0 4px 15px rgba(0,0,0,0.05);
       border: 1px solid #e1e4e8;
     }
-    
     .card h3 {
       font-size: 1.2rem;
       color: var(--secondary-color);
@@ -76,6 +85,7 @@
       padding-left: 10px;
     }
 
+    /* フォーム要素 */
     .form-group { margin-bottom: 20px; }
     .form-group label { display: block; font-weight: bold; margin-bottom: 8px; font-size: 0.95rem; }
     .form-control {
@@ -86,6 +96,7 @@
     .checkbox-group { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 5px; }
     .checkbox-label { cursor: pointer; display: flex; align-items: center; gap: 5px; font-size: 0.9rem; }
 
+    /* プロンプト表示エリア */
     .prompt-area {
       background-color: #f8f9fa;
       padding: 20px;
@@ -100,19 +111,21 @@
       margin-bottom: 15px;
     }
 
+    /* ボタン */
     .btn {
       display: inline-block; padding: 12px 24px; border: none; border-radius: 6px;
       font-size: 1rem; font-weight: bold; cursor: pointer; text-decoration: none; text-align: center;
       transition: background 0.3s;
+      width: 100%;
     }
-    .btn-primary { background-color: var(--secondary-color); color: white; width: 100%; }
-    .btn-primary:hover { background-color: var(--primary-color); }
+    .btn-primary { background-color: var(--btn-primary-bg); color: white; }
+    .btn-primary:hover { background-color: var(--btn-primary-hover); }
     
-    .btn-success { background-color: #27ae60; color: white; width: 100%; }
-    .btn-success:hover { background-color: #219150; }
+    .btn-success { background-color: var(--btn-success-bg); color: white; }
+    .btn-success:hover { background-color: var(--btn-success-hover); }
 
-    .btn-download { background-color: #0056b3; color: white; display: inline-flex; align-items: center; gap: 8px; }
-    .btn-download:hover { background-color: #004494; }
+    .btn-download { background-color: var(--btn-download-bg); color: white; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+    .btn-download:hover { opacity: 0.9; }
 
     .copy-wrapper { position: relative; margin-top: 10px; }
     .warning-box {
@@ -221,30 +234,23 @@
     </div>
 
     <div class="card">
-      <h3>📝 1-2. テスト用データ：機密情報リスト</h3>
-      <p>「マスキングツール」の動作確認用サンプルです。住所・電話番号・メールアドレスなどが含まれています。</p>
-      <div class="prompt-area" id="sample_confidential" style="height: 150px;">【顧客リスト 2026/02/13現在】
+      <h3>📝 1-2. テスト用データ</h3>
+      <p>ツールの動作確認に、以下のテキストを使用してください。</p>
+      
+      <p><strong>機密情報リスト（マスキングツール用）：</strong></p>
+      <div class="prompt-area" id="sample_confidential" style="height: 120px;">【顧客リスト 2026/02/13現在】
 1. 山田 太郎 (ヤマダ タロウ)
    - 電話: 090-1234-5678
-   - Email: taro.yamada@example.com
-   - 住所: 〒105-0011 東京都港区芝公園4-2-8 東京タワービル3F
-
-2. 鈴木 花子 (スズキ ハナコ)
-   - 電話: 080-9876-5432
-   - Email: hanako_suzuki@test.ne.jp
-   - 住所: 大阪府大阪市中央区城見1-1-1
-
-3. 佐藤 次郎 (株式会社ネオ・クリエイト)
-   - 連絡先: 03-1111-2222 (内線: 999)
-   - 担当: jiro.sato@neocreate.co.jp
-   - 備考: 次回の打ち合わせは渋谷区のカフェにて実施予定。
-
-【支払い情報（機密）】
-- カード名義: TARO YAMADA
-- 番号: ****-****-****-1234 (下4桁のみ表示)
-- 期限: 2028/05</div>
+   - Email: taro.yamada@example.com... (コピーボタンを押すと全文が表示されます)</div>
       <button class="btn btn-primary" onclick="loadSampleText('sample_confidential', 'confidential')">📋 機密データをコピー</button>
+      
+      <br><br>
 
+      <p><strong>議事録サンプル（フォーマッター用）：</strong></p>
+      <div class="prompt-area" id="sample_minutes" style="height: 120px;">佐藤： お疲れ様、高橋君。今日は例のキャリア面談ということで...
+(コピーボタンを押すと全文が表示されます)</div>
+      <button class="btn btn-primary" onclick="loadSampleText('sample_minutes', 'minutes')">📋 議事録をコピー</button>
+    </div>
 
     <div class="card" style="background-color: #f0f7ff; border-color: #cce5ff;">
       <h3>💾 1-3. 完成見本：機密情報マスキングツール Pro</h3>
@@ -256,145 +262,84 @@
       </div>
     </div>
 
-    ```
+
     <h2 class="section-title">💎 Section 2: Gems (役割の固定)</h2>
+    
+    <div class="card" style="border: 2px solid #4a148c; background-color: #fff;">
+      <h3 style="color: #4a148c; border-left: 4px solid #4a148c;">🔰 初心者ガイド：Gems（自分専用AI）の作り方</h3>
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #4a148c;">
+          <strong>STEP 1. Geminiで「Gemマネージャー」を開く</strong><br>
+          <span style="font-size: 0.9rem; color: #666;">Geminiの画面左側にある「Gems」メニューから「新しいGemを作成」を選びます。</span>
+        </div>
+        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #4a148c;">
+          <strong>STEP 2. 命令を貼り付ける</strong><br>
+          <span style="font-size: 0.9rem; color: #666;">下のテンプレートをコピーし、Gem設定画面の「手順（Instructions）」欄に貼り付けます。</span>
+        </div>
+        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #4a148c;">
+          <strong>STEP 3. 名前をつけて保存</strong><br>
+          <span style="font-size: 0.9rem; color: #666;">「議事録マスター」など好きな名前をつけ、「作成」ボタンを押せば完成です。</span>
+        </div>
+      </div>
+    </div>
+
     <div class="card">
       <h3>🤵 Gems設定テンプレート</h3>
       <p>「役割」と「手順」をGeminiに記憶させるためのテンプレートです。</p>
-      <div class="prompt-area" id="p_gems"># あなたの役割
-# Role
-
-あなたはプロフェッショナルなエグゼクティブ秘書、兼プロジェクトマネージャーです。
-
-提供された「議事メモ」や「音声スクリプト」を解析し、構造化された正確な議事録を作成してください。
-
-
+      <div class="prompt-area" id="p_gems"># Role
+あなたはプロフェッショナルなエグゼクティブ秘書です。
+提供された「議事メモ」を解析し、構造化された正確な議事録を作成してください。
 
 # Task
-
 ユーザーが入力したテキストから、以下のフォーマットに従って議事録を生成してください。
 
-情報の不足がある場合は、推測せず「不明」とするか、項目自体を省略してください。
-
-
-
 # Output Format
-
 ## 1. 会議概要
-
-- **議題:**（会議のメインタイトル）
-
+- **議題:**
 - **日時:**
-
-- **参加者:**（敬称略）
-
-
+- **参加者:**
 
 ## 2. 決定事項
+- [ ] （決定内容を箇条書き）
 
-- [ ] （決定した内容を箇条書きで記載）
-
-
-
-## 3. 議事詳細（要約）
-
-### [アジェンダ1]
-
-- （議論の要点を簡潔に記載）
-
-- （重要な発言や背景があれば補足）
-
-
-
-### [アジェンダ2]
-
-- ...
-
-
-
-## 4. ネクストアクション（宿題）
-
+## 3. ネクストアクション
 | タスク内容 | 担当者 | 期限 |
-
 | :--- | :--- | :--- |
-
-| 例：資料の修正 | 山田 | 2/20 |
-
-
-
-## 5. 次回予定
-
-- （次回のミーティング日時や持ち越し事項）
-
-
+| 資料修正 | 山田 | 2/20 |
 
 # Guidelines
-
-- **簡潔さ:** 冗長な表現は避け、箇条書きを活用して「一目でわかる」構成にしてください。
-
-- **正確性:** 発言の意図を汲み取りつつ、事実に忠実にまとめてください。
-
-- **フィルタリング:** 「えーと」「あのー」などのフィラーや、本筋に関係のない雑談はカットしてください。
-
-- **トーン:** 丁寧でプロフェッショナルなビジネス敬語を使用してください。
-</div>
-      <button class="btn btn-success" onclick="copyToClipboard(&#39;p_gems&#39;, this)">📋 テンプレートをコピー</button>
-    <div class="card">
-      <h3>📝 1-2. テスト用データ：議事録サンプル</h3>
-      <p>作成したツールの動作確認に、以下のテキストを使用してください。</p>
-      <div class="prompt-area" id="sample_minutes" style="height: 150px;">佐藤： お疲れ様、高橋君。忙しいところ悪いね。今日は例のキャリア面談ということで、今の仕事の状況と、今後のステップアップについて少し腹を割って話せればと思ってるんだ。最近はどうかな？
-
-      高橋： お疲れ様です。そうですね……。担当している自動車部品メーカー向けの既存案件は安定しているんですけど、正直なところ、最近は「ただの御用聞き」になっている気がして。見積もりを出して、納期を調整して、たまにクレーム対応して……というサイクルの繰り返しで、営業としての成長が止まっているんじゃないかと不安になることがあります。
-
-      佐藤： なるほど。既存顧客の維持も立派な仕事だけど、高橋君としてはもっと付加価値の高い提案をしたい、ということかな？
-
-      高橋： はい。実は、今の製品ラインナップに加えて、最近トレンドになっている「環境配慮型の新素材部品」をもっと積極的に提案していきたいんです。でも、今の業務フローだと見積作成や納期の催促といった事務作業に追われていて、新しい技術資料を読み込んだり、顧客の設計部門に食い込んだりする時間が全然取れなくて。
-
-      佐藤： 事務作業の負担か。それはチーム全体の課題でもあるな。あ、そういえばちょっと話逸れるけど、先週の展示会で使ったパネルの保管場所、ちゃんと倉庫のB棟に移しておいてくれた？ 邪魔だって資材部から小言言われちゃってさ（笑）。
-
-      高橋： あ、すみません！ 戻し忘れてました。今日、外回りから帰ったらすぐにやっておきます。
-
-      佐藤： 悪いね。で、本題に戻るけど、高橋君は「ソリューション型」の営業にシフトしたいってことだよね。単にモノを売るだけじゃなくて、顧客のカーボンニュートラル対応まで踏み込んだ提案をしたいと。
-
-      高橋： おっしゃる通りです。ただ、今のメイン担当であるA社（大手メーカー）のボリュームが大きすぎて、どうしてもそこを優先せざるを得ないんです。このままだと5年後、10年後も同じことをしている気がして。
-
-      佐藤： 分かった。高橋君の意欲はよく伝わったよ。だったら、次の下半期から少し役割を変えてみよう。今のA社の定型業務の一部を、新人の鈴木君に引き継ぐのはどうだろう？ 彼は彼で、実務を覚える段階だからちょうどいい。
-
-      高橋： 鈴木君にですか。確かに、彼もだいぶ慣れてきましたし、私のサポートがあれば回せるかもしれません。
-
-      佐藤： よし。じゃあ条件だ。2週間以内に「新素材部品のターゲット顧客リスト」と「初期提案用のプレゼン骨子」を作ってみてくれないか？ それを営業会議で通せれば、正式に高橋君を「新規事業開発兼務」としてアサインするよ。
-
-      高橋： 本当ですか！ ありがとうございます。やらせてください。リストと骨子ですね。3月最初の金曜日までには仕上げます。
-
-      佐藤： 期待してるよ。それと、その「環境配慮型」の提案をするには、少し専門的な知識も必要だよね。会社で推奨している「環境経営士」の資格とか、興味ある？ 取得費用は会社が持つ制度があるんだ。
-
-      高橋： あ、それ気になっていました。試験は6月ですよね。今から勉強を始めれば間に合うと思います。ぜひ活用させてください。
-
-      佐藤： よし、それは人事に確認して、後で申請マニュアルを共有するよ。あと、さっき言った「事務作業の効率化」についても、何かアイデアがあれば教えてほしい。高橋君が楽になれば、他のメンバーも助かるはずだから。
-
-      高橋： そうですね……。例えば、見積依頼のフォーマットを共通化するだけでも、設計部門とのやり取りがかなりスムーズになる気がします。今まで電話やメールでバラバラだったので。
-
-      佐藤： それは良い着眼点だ。その見積フォーマットのたたき台も、併せて考えておいてくれるかな？
-
-      高橋： 承知しました。新規提案の準備、資格の勉強、それに見積フォーマットの改善ですね。
-
-      佐藤： うん。あとは、新人の鈴木君の指導もよろしく頼むよ。彼、高橋君の営業スタイルを尊敬してるみたいだから。週に一度、移動中とかでもいいから、彼と状況確認する時間を取ってあげて。
-
-      高橋： わかりました。鈴木君との定期的な打ち合わせもスケジュールに入れます。
-
-      佐藤： よし。まとめると……まずは倉庫のパネル移動（笑）。それから2週間後の提案準備。資格の申請。見積フォーマットの検討。そして鈴木君のメンター。盛りだくさんだけど、大丈夫かな？
-
-      高橋： はい！ 自分のやりたかった方向に進めるチャンスなので、全力でやります。
-
-      佐藤： その意気だ。期待しているよ。あ、いけない、次の来客が来ちゃった。今日はここまで。
-
-      高橋： ありがとうございました！ 失礼します。</div>
-      <button class="btn btn-primary" onclick="loadSampleText(&#39;sample_minutes&#39;, &#39;minutes&#39;)">📋 全文をコピー</button>
-    </div>
+- 冗長な表現は避け、箇条書きを活用する。
+- 「えーと」などのフィラーは削除する。</div>
+      <button class="btn btn-success" onclick="copyToClipboard('p_gems', this)">📋 テンプレートをコピー</button>
     </div>
 
 
     <h2 class="section-title">⚙️ Section 3: GAS (業務自動化)</h2>
+    
+    <div class="card" style="border: 2px solid #2c3e50; background-color: #fff;">
+      <h3 style="color: #2c3e50; border-left: 4px solid #2c3e50;">🔰 初心者ガイド：GASで自動化する4ステップ</h3>
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #0056b3;">
+          <strong>STEP 1. Geminiにコードを作らせる</strong><br>
+          <span style="font-size: 0.9rem; color: #666;">下のプロンプトをGeminiに投げ、生成されたコードをコピーします。</span>
+        </div>
+        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #0056b3;">
+          <strong>STEP 2. スクリプトエディタを開く</strong><br>
+          <span style="font-size: 0.9rem; color: #666;">Googleドライブの「新規」ボタン ＞ 「その他」 ＞ 「Google Apps Script」をクリックします。</span>
+        </div>
+        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #0056b3;">
+          <strong>STEP 3. コードを貼り付ける</strong><br>
+          <span style="font-size: 0.9rem; color: #666;">元々入っている文字をすべて消し、STEP 1のコードを貼り付けて保存（Ctrl+S）します。</span>
+        </div>
+        <div style="background: #fff3cd; padding: 15px; border-radius: 8px; border-left: 4px solid #ffc107;">
+          <strong>STEP 4. 実行と承認（最初だけ！）</strong><br>
+          <span style="font-size: 0.9rem; color: #333;">
+            「実行」ボタンを押すと許可を求められます。「権限を確認」 ＞ アカウント選択 ＞ 「詳細」 ＞ 「安全ではないページに移動」 ＞ 「許可」の順に進んでください。
+          </span>
+        </div>
+      </div>
+    </div>
+
     <div class="card">
       <h3>📂 ファイル名一括変更スクリプト</h3>
       <div class="warning-box">⚠️ 実行する際は必ず「練習用の空フォルダ」を作って試してください。</div>
@@ -409,27 +354,26 @@ Googleドライブの「特定のフォルダ」に入っているすべての�
 1. フォルダIDは、スクリプトの冒頭で変数として指定できるようにする。
 2. 重複実行防止機能をつける（既に日付がある場合はスキップ）。
 3. 実行完了時にログを出力する。</div>
-      <button class="btn btn-success" onclick="copyToClipboard(&#39;p_gas&#39;, this)">📋 プロンプトをコピー</button>
+      <button class="btn btn-success" onclick="copyToClipboard('p_gas', this)">📋 プロンプトをコピー</button>
     </div>
+
 
     <h2 class="section-title">📚 Section 4: NotebookLM (組織知)</h2>
     
     <div class="card">
       <h3>📖 演習用データ：社内規約サンプル</h3>
       <p>以下のテキストをコピーし、NotebookLMに貼り付けてください。</p>
-      <div class="prompt-area" id="sample_rules" style="height: 200px;">就業規則（サンプル）
+      <div class="prompt-area" id="sample_rules" style="height: 150px;">就業規則（サンプル）
 株式会社ネオ・クリエイト
 
 第1章 総則
 第1条（目的）
 本規則は、株式会社ネオ・クリエイト（以下「会社」という）の社員の就業に関する事項を定めるものである。
+
+第2章 勤務時間と休憩
 ...
-（中略）
-...
-第8条（副業の自由と報告義務）
-会社は社員の副業を全面的に許可する。
-ただし、競合他社からの直接請負、および自社のリソース（PC、サーバー等）の私用は禁止する。</div>
-      <button class="btn btn-primary" onclick="loadSampleText(&#39;sample_rules&#39;, &#39;rules&#39;)">📋 全文をコピー</button>
+(コピーボタンを押すと全文が表示されます)</div>
+      <button class="btn btn-primary" onclick="loadSampleText('sample_rules', 'rules')">📋 全文をコピー</button>
     </div>
 
   </div>
@@ -496,11 +440,34 @@ const o=document.getElementById('output');o.textContent=t;document.getElementByI
 function copyResult(){const t=document.getElementById('output').textContent;if(t){navigator.clipboard.writeText(t);alert('コピーしました');}}
 function resetAll(){if(confirm('クリアしますか？')){document.getElementById('input').value='';document.getElementById('output').textContent='';customTags.clear();renderTags();}}
 function downloadResult(){const t=document.getElementById('output').textContent;if(!t)return;const b=new Blob([t],{type:'text/plain'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='masked.txt';a.click();}
-</script>
-  
+</script></body></html>
+  </script>
   <script>
-    // --- 1. サンプルテキストデータ ---
+    // --- 1. サンプルデータストア (機密データ追加済み) ---
     const dataStore = {
+      // マスキング用 機密情報データ
+      confidential: `【顧客リスト 2026/02/13現在】
+1. 山田 太郎 (ヤマダ タロウ)
+   - 電話: 090-1234-5678
+   - Email: taro.yamada@example.com
+   - 住所: 〒105-0011 東京都港区芝公園4-2-8 東京タワービル3F
+
+2. 鈴木 花子 (スズキ ハナコ)
+   - 電話: 080-9876-5432
+   - Email: hanako_suzuki@test.ne.jp
+   - 住所: 大阪府大阪市中央区城見1-1-1
+
+3. 佐藤 次郎 (株式会社ネオ・クリエイト)
+   - 連絡先: 03-1111-2222 (内線: 999)
+   - 担当: jiro.sato@neocreate.co.jp
+   - 備考: 次回の打ち合わせは渋谷区のカフェにて実施予定。
+
+【支払い情報（機密）】
+- カード名義: TARO YAMADA
+- 番号: ****-****-****-1234 (下4桁のみ表示)
+- 期限: 2028/05`,
+
+      // 議事録サンプル
       minutes: `佐藤： お疲れ様、高橋君。忙しいところ悪いね。今日は例のキャリア面談ということで、今の仕事の状況と、今後のステップアップについて少し腹を割って話せればと思ってるんだ。最近はどうかな？
 高橋： お疲れ様です。そうですね……。担当している自動車部品メーカー向けの既存案件は安定しているんですけど、正直なところ、最近は「ただの御用聞き」になっている気がして。見積もりを出して、納期を調整して、たまにクレーム対応して……というサイクルの繰り返しで、営業としての成長が止まっているんじゃないかと不安になることがあります。
 佐藤： なるほど。既存顧客の維持も立派な仕事だけど、高橋君としてはもっと付加価値の高い提案をしたい、ということかな？
@@ -526,6 +493,7 @@ function downloadResult(){const t=document.getElementById('output').textContent;
 佐藤： その意気だ。期待しているよ。あ、いけない、次の来客が来ちゃった。今日はここまで。
 高橋： ありがとうございました！ 失礼します。`,
       
+      // 規約サンプル
       rules: `就業規則（サンプル）
 株式会社ネオ・クリエイト
 
@@ -574,7 +542,6 @@ AIに対して、顧客の機密情報（個人情報、未公開の仕様書）
     };
 
     // --- 2. ダウンロード機能の初期化 ---
-    // 隠しテンプレートから安全にHTMLを取得してBlobを作成
     window.addEventListener('DOMContentLoaded', () => {
       try {
         const rawHtml = document.getElementById('template-model-app').textContent.trim();
@@ -585,17 +552,16 @@ AIに対して、顧客の機密情報（個人情報、未公開の仕様書）
       }
     });
 
-    // --- 3. コピー機能 ---
+    // --- 3. コピー機能（テキストボックス & dataStore両対応） ---
     function copyToClipboard(elementId, btnElement) {
       const target = document.getElementById(elementId);
       const text = target.innerText || target.value;
       
       navigator.clipboard.writeText(text).then(() => {
         showSuccess(btnElement);
-      }).catch(() => {
-        // セキュリティ制限で失敗した場合のフォールバック
-        alert("コピーできませんでした。手動でコピーしてください。");
-        target.select();
+      }).catch(err => {
+        console.error('Copy failed:', err);
+        alert("コピーに失敗しました。セキュリティ設定を確認するか、手動でコピーしてください。");
       });
     }
 
@@ -605,12 +571,24 @@ AIに対して、顧客の機密情報（個人情報、未公開の仕様書）
       setTimeout(() => { btn.innerText = originalText; }, 2000);
     }
 
-    // --- 4. サンプルテキスト読み込み ---
+    // --- 4. サンプルテキスト読み込み＆コピー機能 ---
     function loadSampleText(elementId, key) {
       if(dataStore[key]) {
+        // 1. テキストを画面に表示（展開）
         document.getElementById(elementId).innerText = dataStore[key];
-        const btn = document.querySelector(`button[onclick*="'${key}'"]`);
-        if(btn) showSuccess(btn);
+        
+        // 2. クリップボードにコピー
+        navigator.clipboard.writeText(dataStore[key]).then(() => {
+            // 3. ボタンの表示を更新
+            const btn = document.querySelector(`button[onclick*="'${key}'"]`);
+            if(btn) showSuccess(btn);
+        }).catch(err => {
+            console.error('Copy failed:', err);
+            alert("テキストの展開は完了しましたが、コピーに失敗しました。手動でコピーしてください。");
+        });
+
+      } else {
+          console.error("Data not found for key:", key);
       }
     }
 
@@ -665,5 +643,5 @@ ${featureList}
         document.getElementById('finalPrompt').value = prompt;
     }
   </script>
-
-</body></html>
+</body>
+</html>

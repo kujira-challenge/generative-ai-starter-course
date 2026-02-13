@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
+<!-- saved from url=(0081)https://kujira-challenge.github.io/generative-ai-starter-course/lw_corp_day3.html -->
+<html lang="ja"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>生成AI活用研修 Day 3 - 実装・業務自動化ブートキャンプ</title>
   <style>
@@ -141,6 +141,38 @@
 
     <h2 class="section-title">🔒 Section 1: HTMLミニアプリ開発</h2>
 
+    <div class="card" style="border: 2px solid #2c3e50; background-color: #fff;">
+      <h3 style="color: #2c3e50; border-left: 4px solid #2c3e50;">🔰 初心者ガイド：AIでツールを作る5ステップ</h3>
+      <p style="margin-bottom: 15px;">プログラミング知識は不要です。以下の手順で誰でもアプリが作れます。</p>
+      
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #0056b3;">
+          <strong>STEP 1. Geminiにコードを作らせる</strong><br>
+          <span style="font-size: 0.9rem; color: #666;">下の「プロンプト生成機」で指示を作り、Geminiに貼り付けます。Geminiが黒い画面（コードブロック）でプログラムを出力します。</span>
+        </div>
+        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #0056b3;">
+          <strong>STEP 2. メモ帳を開く</strong><br>
+          <span style="font-size: 0.9rem; color: #666;">PCの「メモ帳」アプリを新規で開きます。（Windowsキーを押して「メモ帳」と検索）</span>
+        </div>
+        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #0056b3;">
+          <strong>STEP 3. コードを貼り付ける</strong><br>
+          <span style="font-size: 0.9rem; color: #666;">Geminiが作ったコードをコピーし、メモ帳にそのまま貼り付けます。</span>
+        </div>
+        <div style="background: #fff3cd; padding: 15px; border-radius: 8px; border-left: 4px solid #ffc107;">
+          <strong>STEP 4. 名前をつけて保存（重要！）</strong><br>
+          <span style="font-size: 0.9rem; color: #333;">
+            1. メニューの「ファイル」→「名前をつけて保存」<br>
+            2. ファイル名の末尾を <b>.html</b> にする（例：<code>tool.html</code>）<br>
+            3. ファイルの種類を「すべてのファイル」に変更して保存ボタンを押す。
+          </span>
+        </div>
+        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #0056b3;">
+          <strong>STEP 5. ブラウザで開く</strong><br>
+          <span style="font-size: 0.9rem; color: #666;">保存したファイルをダブルクリックします。Chromeなどのブラウザでツールが起動します。</span>
+        </div>
+      </div>
+    </div>
+
     <div class="card">
       <h3>🛠️ 1-1. アプリ開発プロンプト生成機</h3>
       <p style="margin-bottom:20px;">作りたいツールの要件を入力し、「プロンプトを作成する」を押してください。</p>
@@ -188,8 +220,34 @@
       </div>
     </div>
 
+    <div class="card">
+      <h3>📝 1-2. テスト用データ：機密情報リスト</h3>
+      <p>「マスキングツール」の動作確認用サンプルです。住所・電話番号・メールアドレスなどが含まれています。</p>
+      <div class="prompt-area" id="sample_confidential" style="height: 150px;">【顧客リスト 2026/02/13現在】
+1. 山田 太郎 (ヤマダ タロウ)
+   - 電話: 090-1234-5678
+   - Email: taro.yamada@example.com
+   - 住所: 〒105-0011 東京都港区芝公園4-2-8 東京タワービル3F
+
+2. 鈴木 花子 (スズキ ハナコ)
+   - 電話: 080-9876-5432
+   - Email: hanako_suzuki@test.ne.jp
+   - 住所: 大阪府大阪市中央区城見1-1-1
+
+3. 佐藤 次郎 (株式会社ネオ・クリエイト)
+   - 連絡先: 03-1111-2222 (内線: 999)
+   - 担当: jiro.sato@neocreate.co.jp
+   - 備考: 次回の打ち合わせは渋谷区のカフェにて実施予定。
+
+【支払い情報（機密）】
+- カード名義: TARO YAMADA
+- 番号: ****-****-****-1234 (下4桁のみ表示)
+- 期限: 2028/05</div>
+      <button class="btn btn-primary" onclick="loadSampleText('sample_confidential', 'confidential')">📋 機密データをコピー</button>
+
+
     <div class="card" style="background-color: #f0f7ff; border-color: #cce5ff;">
-      <h3>💾 1-2. 完成見本：機密情報マスキングツール Pro</h3>
+      <h3>💾 1-3. 完成見本：機密情報マスキングツール Pro</h3>
       <p>講師作成の完成版アプリです。演習の参考や、実際の業務利用にダウンロードして使ってください。</p>
       <div style="text-align: center; padding: 20px;">
         <a id="downloadModelApp" class="btn btn-download" href="#" download="機密情報マスキングツールPro.html">
@@ -198,6 +256,7 @@
       </div>
     </div>
 
+    ```
     <h2 class="section-title">💎 Section 2: Gems (役割の固定)</h2>
     <div class="card">
       <h3>🤵 Gems設定テンプレート</h3>
@@ -279,7 +338,7 @@
 
 - **トーン:** 丁寧でプロフェッショナルなビジネス敬語を使用してください。
 </div>
-      <button class="btn btn-success" onclick="copyToClipboard('p_gems', this)">📋 テンプレートをコピー</button>
+      <button class="btn btn-success" onclick="copyToClipboard(&#39;p_gems&#39;, this)">📋 テンプレートをコピー</button>
     <div class="card">
       <h3>📝 1-2. テスト用データ：議事録サンプル</h3>
       <p>作成したツールの動作確認に、以下のテキストを使用してください。</p>
@@ -330,7 +389,7 @@
       佐藤： その意気だ。期待しているよ。あ、いけない、次の来客が来ちゃった。今日はここまで。
 
       高橋： ありがとうございました！ 失礼します。</div>
-      <button class="btn btn-primary" onclick="loadSampleText('sample_minutes', 'minutes')">📋 全文をコピー</button>
+      <button class="btn btn-primary" onclick="loadSampleText(&#39;sample_minutes&#39;, &#39;minutes&#39;)">📋 全文をコピー</button>
     </div>
     </div>
 
@@ -350,7 +409,7 @@ Googleドライブの「特定のフォルダ」に入っているすべての�
 1. フォルダIDは、スクリプトの冒頭で変数として指定できるようにする。
 2. 重複実行防止機能をつける（既に日付がある場合はスキップ）。
 3. 実行完了時にログを出力する。</div>
-      <button class="btn btn-success" onclick="copyToClipboard('p_gas', this)">📋 プロンプトをコピー</button>
+      <button class="btn btn-success" onclick="copyToClipboard(&#39;p_gas&#39;, this)">📋 プロンプトをコピー</button>
     </div>
 
     <h2 class="section-title">📚 Section 4: NotebookLM (組織知)</h2>
@@ -370,7 +429,7 @@ Googleドライブの「特定のフォルダ」に入っているすべての�
 第8条（副業の自由と報告義務）
 会社は社員の副業を全面的に許可する。
 ただし、競合他社からの直接請負、および自社のリソース（PC、サーバー等）の私用は禁止する。</div>
-      <button class="btn btn-primary" onclick="loadSampleText('sample_rules', 'rules')">📋 全文をコピー</button>
+      <button class="btn btn-primary" onclick="loadSampleText(&#39;sample_rules&#39;, &#39;rules&#39;)">📋 全文をコピー</button>
     </div>
 
   </div>
@@ -437,8 +496,8 @@ const o=document.getElementById('output');o.textContent=t;document.getElementByI
 function copyResult(){const t=document.getElementById('output').textContent;if(t){navigator.clipboard.writeText(t);alert('コピーしました');}}
 function resetAll(){if(confirm('クリアしますか？')){document.getElementById('input').value='';document.getElementById('output').textContent='';customTags.clear();renderTags();}}
 function downloadResult(){const t=document.getElementById('output').textContent;if(!t)return;const b=new Blob([t],{type:'text/plain'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='masked.txt';a.click();}
-</script></body></html>
-  </script>
+</script>
+  
   <script>
     // --- 1. サンプルテキストデータ ---
     const dataStore = {
@@ -606,5 +665,5 @@ ${featureList}
         document.getElementById('finalPrompt').value = prompt;
     }
   </script>
-</body>
-</html>
+
+</body></html>

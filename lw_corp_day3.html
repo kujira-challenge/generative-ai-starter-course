@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生成AI活用研修 Day 3 - 実装・業務自動化ブートキャンプ</title>
+  <style>
+    :root {
+      /* Day 3 カラーテーマ */
+      --primary-color: #2c3e50;
+      --secondary-color: #4a148c;
+      --accent-color: #f3e5f5;
+      --text-color: #333333;
+      --bg-color: #f4f6f8;
+      --card-bg: #ffffff;
+      --btn-primary: #0056b3;
+      --btn-hover: #004494;
+      --warning-bg: #fff3cd;
+      --warning-text: #856404;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    .header {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .header h1 { font-size: 2rem; margin-bottom: 10px; font-weight: 700; }
+
+    .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+
+    .intro-box {
+      background: white;
+      border-left: 5px solid var(--secondary-color);
+      padding: 25px;
+      border-radius: 8px;
+      margin-bottom: 40px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      color: var(--primary-color);
+      margin: 60px 0 20px 0;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #dde2e6;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      border: 1px solid #e1e4e8;
+    }
+    
+    .card h3 {
+      font-size: 1.2rem;
+      color: var(--secondary-color);
+      margin-bottom: 15px;
+      border-left: 4px solid var(--secondary-color);
+      padding-left: 10px;
+    }
+
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-weight: bold; margin-bottom: 8px; font-size: 0.95rem; }
+    .form-control {
+      width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem;
+    }
+    textarea.form-control { height: 100px; resize: vertical; }
+    
+    .checkbox-group { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 5px; }
+    .checkbox-label { cursor: pointer; display: flex; align-items: center; gap: 5px; font-size: 0.9rem; }
+
+    .prompt-area {
+      background-color: #f8f9fa;
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      font-family: "Consolas", "Monaco", monospace;
+      font-size: 0.9rem;
+      color: #444;
+      white-space: pre-wrap;
+      max-height: 400px;
+      overflow-y: auto;
+      margin-bottom: 15px;
+    }
+
+    .btn {
+      display: inline-block; padding: 12px 24px; border: none; border-radius: 6px;
+      font-size: 1rem; font-weight: bold; cursor: pointer; text-decoration: none; text-align: center;
+      transition: background 0.3s;
+    }
+    .btn-primary { background-color: var(--secondary-color); color: white; width: 100%; }
+    .btn-primary:hover { background-color: var(--primary-color); }
+    
+    .btn-success { background-color: #27ae60; color: white; width: 100%; }
+    .btn-success:hover { background-color: #219150; }
+
+    .btn-download { background-color: #0056b3; color: white; display: inline-flex; align-items: center; gap: 8px; }
+    .btn-download:hover { background-color: #004494; }
+
+    .copy-wrapper { position: relative; margin-top: 10px; }
+    .warning-box {
+      background-color: var(--warning-bg);
+      color: var(--warning-text);
+      padding: 15px;
+      border-radius: 6px;
+      margin-top: 15px;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <h1>生成AI活用研修 Day 3</h1>
+    <p>実装・業務自動化ブートキャンプ：演習用ポータル</p>
+  </header>
+
+  <div class="container">
+
+    <div class="intro-box">
+      <h2>🚀 Day 3：「個人のスキル」を「組織のシステム」へ</h2>
+      <p>本日は、Geminiを使って実際に動く「ツール」や「システム」を作ります。</p>
+    </div>
+
+    <h2 class="section-title">🔒 Section 1: HTMLミニアプリ開発</h2>
+
+    <div class="card">
+      <h3>🛠️ 1-1. アプリ開発プロンプト生成機</h3>
+      <p style="margin-bottom:20px;">作りたいツールの要件を入力し、「プロンプトを作成する」を押してください。</p>
+      
+      <div class="form-group">
+        <label>作りたいツールの名前</label>
+        <input type="text" id="toolName" class="form-control" placeholder="例：機密情報マスキングツール、議事録フォーマッター">
+      </div>
+
+      <div class="form-group">
+        <label>入力データ (Input)</label>
+        <textarea id="inputData" class="form-control" placeholder="例：議事録のテキストデータ。個人名や電話番号が含まれています。"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>処理内容 (Process)</label>
+        <textarea id="processData" class="form-control" placeholder="例：電話番号とメールアドレスを『***』に置換する。また、行頭に『・』をつけて箇条書きにする。"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>必要な機能</label>
+        <div class="checkbox-group">
+          <label class="checkbox-label"><input type="checkbox" id="featCopy" checked> コピーボタン</label>
+          <label class="checkbox-label"><input type="checkbox" id="featClear" checked> リセットボタン</label>
+          <label class="checkbox-label"><input type="checkbox" id="featDownload" checked> 保存機能(.txt)</label>
+          <label class="checkbox-label"><input type="checkbox" id="featCount"> 文字数カウント</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>デザインテーマ</label>
+        <select id="designTheme" class="form-control">
+          <option value="corporate">LW標準（信頼感のある青と白）</option>
+          <option value="modern">モダン（シンプル・ミニマル）</option>
+          <option value="warm">親しみやすい（暖色系）</option>
+        </select>
+      </div>
+
+      <button class="btn btn-primary" onclick="generatePrompt()">🚀 プロンプトを作成する</button>
+
+      <div class="copy-wrapper" style="margin-top: 20px;">
+        <label>生成結果（ここをコピーしてGeminiに貼る）：</label>
+        <textarea id="finalPrompt" class="prompt-area" style="height: 250px;" readonly></textarea>
+        <button class="btn btn-success" onclick="copyToClipboard('finalPrompt', this)">📋 プロンプトをコピー</button>
+      </div>
+    </div>
+
+    <div class="card" style="background-color: #f0f7ff; border-color: #cce5ff;">
+      <h3>💾 1-2. 完成見本：機密情報マスキングツール Pro</h3>
+      <p>講師作成の完成版アプリです。演習の参考や、実際の業務利用にダウンロードして使ってください。</p>
+      <div style="text-align: center; padding: 20px;">
+        <a id="downloadModelApp" class="btn btn-download" href="#" download="機密情報マスキングツールPro.html">
+          📥 ツールをダウンロード (.html)
+        </a>
+      </div>
+    </div>
+
+    <h2 class="section-title">💎 Section 2: Gems (役割の固定)</h2>
+    <div class="card">
+      <h3>🤵 Gems設定テンプレート</h3>
+      <p>「役割」と「手順」をGeminiに記憶させるためのテンプレートです。</p>
+      <div class="prompt-area" id="p_gems"># あなたの役割
+# Role
+
+あなたはプロフェッショナルなエグゼクティブ秘書、兼プロジェクトマネージャーです。
+
+提供された「議事メモ」や「音声スクリプト」を解析し、構造化された正確な議事録を作成してください。
+
+
+
+# Task
+
+ユーザーが入力したテキストから、以下のフォーマットに従って議事録を生成してください。
+
+情報の不足がある場合は、推測せず「不明」とするか、項目自体を省略してください。
+
+
+
+# Output Format
+
+## 1. 会議概要
+
+- **議題:**（会議のメインタイトル）
+
+- **日時:**
+
+- **参加者:**（敬称略）
+
+
+
+## 2. 決定事項
+
+- [ ] （決定した内容を箇条書きで記載）
+
+
+
+## 3. 議事詳細（要約）
+
+### [アジェンダ1]
+
+- （議論の要点を簡潔に記載）
+
+- （重要な発言や背景があれば補足）
+
+
+
+### [アジェンダ2]
+
+- ...
+
+
+
+## 4. ネクストアクション（宿題）
+
+| タスク内容 | 担当者 | 期限 |
+
+| :--- | :--- | :--- |
+
+| 例：資料の修正 | 山田 | 2/20 |
+
+
+
+## 5. 次回予定
+
+- （次回のミーティング日時や持ち越し事項）
+
+
+
+# Guidelines
+
+- **簡潔さ:** 冗長な表現は避け、箇条書きを活用して「一目でわかる」構成にしてください。
+
+- **正確性:** 発言の意図を汲み取りつつ、事実に忠実にまとめてください。
+
+- **フィルタリング:** 「えーと」「あのー」などのフィラーや、本筋に関係のない雑談はカットしてください。
+
+- **トーン:** 丁寧でプロフェッショナルなビジネス敬語を使用してください。
+</div>
+      <button class="btn btn-success" onclick="copyToClipboard('p_gems', this)">📋 テンプレートをコピー</button>
+    <div class="card">
+      <h3>📝 1-2. テスト用データ：議事録サンプル</h3>
+      <p>作成したツールの動作確認に、以下のテキストを使用してください。</p>
+      <div class="prompt-area" id="sample_minutes" style="height: 150px;">佐藤： お疲れ様、高橋君。忙しいところ悪いね。今日は例のキャリア面談ということで、今の仕事の状況と、今後のステップアップについて少し腹を割って話せればと思ってるんだ。最近はどうかな？
+
+      高橋： お疲れ様です。そうですね……。担当している自動車部品メーカー向けの既存案件は安定しているんですけど、正直なところ、最近は「ただの御用聞き」になっている気がして。見積もりを出して、納期を調整して、たまにクレーム対応して……というサイクルの繰り返しで、営業としての成長が止まっているんじゃないかと不安になることがあります。
+
+      佐藤： なるほど。既存顧客の維持も立派な仕事だけど、高橋君としてはもっと付加価値の高い提案をしたい、ということかな？
+
+      高橋： はい。実は、今の製品ラインナップに加えて、最近トレンドになっている「環境配慮型の新素材部品」をもっと積極的に提案していきたいんです。でも、今の業務フローだと見積作成や納期の催促といった事務作業に追われていて、新しい技術資料を読み込んだり、顧客の設計部門に食い込んだりする時間が全然取れなくて。
+
+      佐藤： 事務作業の負担か。それはチーム全体の課題でもあるな。あ、そういえばちょっと話逸れるけど、先週の展示会で使ったパネルの保管場所、ちゃんと倉庫のB棟に移しておいてくれた？ 邪魔だって資材部から小言言われちゃってさ（笑）。
+
+      高橋： あ、すみません！ 戻し忘れてました。今日、外回りから帰ったらすぐにやっておきます。
+
+      佐藤： 悪いね。で、本題に戻るけど、高橋君は「ソリューション型」の営業にシフトしたいってことだよね。単にモノを売るだけじゃなくて、顧客のカーボンニュートラル対応まで踏み込んだ提案をしたいと。
+
+      高橋： おっしゃる通りです。ただ、今のメイン担当であるA社（大手メーカー）のボリュームが大きすぎて、どうしてもそこを優先せざるを得ないんです。このままだと5年後、10年後も同じことをしている気がして。
+
+      佐藤： 分かった。高橋君の意欲はよく伝わったよ。だったら、次の下半期から少し役割を変えてみよう。今のA社の定型業務の一部を、新人の鈴木君に引き継ぐのはどうだろう？ 彼は彼で、実務を覚える段階だからちょうどいい。
+
+      高橋： 鈴木君にですか。確かに、彼もだいぶ慣れてきましたし、私のサポートがあれば回せるかもしれません。
+
+      佐藤： よし。じゃあ条件だ。2週間以内に「新素材部品のターゲット顧客リスト」と「初期提案用のプレゼン骨子」を作ってみてくれないか？ それを営業会議で通せれば、正式に高橋君を「新規事業開発兼務」としてアサインするよ。
+
+      高橋： 本当ですか！ ありがとうございます。やらせてください。リストと骨子ですね。3月最初の金曜日までには仕上げます。
+
+      佐藤： 期待してるよ。それと、その「環境配慮型」の提案をするには、少し専門的な知識も必要だよね。会社で推奨している「環境経営士」の資格とか、興味ある？ 取得費用は会社が持つ制度があるんだ。
+
+      高橋： あ、それ気になっていました。試験は6月ですよね。今から勉強を始めれば間に合うと思います。ぜひ活用させてください。
+
+      佐藤： よし、それは人事に確認して、後で申請マニュアルを共有するよ。あと、さっき言った「事務作業の効率化」についても、何かアイデアがあれば教えてほしい。高橋君が楽になれば、他のメンバーも助かるはずだから。
+
+      高橋： そうですね……。例えば、見積依頼のフォーマットを共通化するだけでも、設計部門とのやり取りがかなりスムーズになる気がします。今まで電話やメールでバラバラだったので。
+
+      佐藤： それは良い着眼点だ。その見積フォーマットのたたき台も、併せて考えておいてくれるかな？
+
+      高橋： 承知しました。新規提案の準備、資格の勉強、それに見積フォーマットの改善ですね。
+
+      佐藤： うん。あとは、新人の鈴木君の指導もよろしく頼むよ。彼、高橋君の営業スタイルを尊敬してるみたいだから。週に一度、移動中とかでもいいから、彼と状況確認する時間を取ってあげて。
+
+      高橋： わかりました。鈴木君との定期的な打ち合わせもスケジュールに入れます。
+
+      佐藤： よし。まとめると……まずは倉庫のパネル移動（笑）。それから2週間後の提案準備。資格の申請。見積フォーマットの検討。そして鈴木君のメンター。盛りだくさんだけど、大丈夫かな？
+
+      高橋： はい！ 自分のやりたかった方向に進めるチャンスなので、全力でやります。
+
+      佐藤： その意気だ。期待しているよ。あ、いけない、次の来客が来ちゃった。今日はここまで。
+
+      高橋： ありがとうございました！ 失礼します。</div>
+      <button class="btn btn-primary" onclick="loadSampleText('sample_minutes', 'minutes')">📋 全文をコピー</button>
+    </div>
+    </div>
+
+
+    <h2 class="section-title">⚙️ Section 3: GAS (業務自動化)</h2>
+    <div class="card">
+      <h3>📂 ファイル名一括変更スクリプト</h3>
+      <div class="warning-box">⚠️ 実行する際は必ず「練習用の空フォルダ」を作って試してください。</div>
+      <br>
+      <div class="prompt-area" id="p_gas"># 命令
+Google Apps Script (GAS) のコードを書いてください。
+
+# やりたいこと
+Googleドライブの「特定のフォルダ」に入っているすべてのファイルに対して、ファイル名の先頭に「今日の日付（YYYYMMDD_形式）」を追加したいです。
+
+# 要件
+1. フォルダIDは、スクリプトの冒頭で変数として指定できるようにする。
+2. 重複実行防止機能をつける（既に日付がある場合はスキップ）。
+3. 実行完了時にログを出力する。</div>
+      <button class="btn btn-success" onclick="copyToClipboard('p_gas', this)">📋 プロンプトをコピー</button>
+    </div>
+
+    <h2 class="section-title">📚 Section 4: NotebookLM (組織知)</h2>
+    
+    <div class="card">
+      <h3>📖 演習用データ：社内規約サンプル</h3>
+      <p>以下のテキストをコピーし、NotebookLMに貼り付けてください。</p>
+      <div class="prompt-area" id="sample_rules" style="height: 200px;">就業規則（サンプル）
+株式会社ネオ・クリエイト
+
+第1章 総則
+第1条（目的）
+本規則は、株式会社ネオ・クリエイト（以下「会社」という）の社員の就業に関する事項を定めるものである。
+...
+（中略）
+...
+第8条（副業の自由と報告義務）
+会社は社員の副業を全面的に許可する。
+ただし、競合他社からの直接請負、および自社のリソース（PC、サーバー等）の私用は禁止する。</div>
+      <button class="btn btn-primary" onclick="loadSampleText('sample_rules', 'rules')">📋 全文をコピー</button>
+    </div>
+
+  </div>
+
+  <footer style="text-align: center; padding: 40px; color: #888; font-size: 0.9rem;">
+    <p>© 2026 LW Generative AI Training - Day 3 Resources</p>
+  </footer>
+
+  <script id="template-model-app" type="text/plain">
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個人情報マスキングツール Pro</title>
+<style>
+:root{--primary:#0056b3;--bg:#f4f7f9;--card:#ffffff;--border:#ced4da;--text:#334155;--success:#28a745}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--text);padding:20px;line-height:1.6}
+.container{max-width:900px;margin:0 auto;background:var(--card);padding:30px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.08)}
+header{border-bottom:2px solid var(--primary);margin-bottom:20px;padding-bottom:10px}h1{font-size:1.4rem;color:var(--primary)}
+.config-section{background:#f8fafc;border:1px solid var(--border);padding:15px;border-radius:8px;margin-bottom:20px}
+.config-title{font-weight:bold;margin-bottom:10px;font-size:0.9rem;display:block}.input-row{display:flex;gap:8px;margin-bottom:10px}
+input[type="text"]{flex:1;padding:8px 12px;border:1px solid var(--border);border-radius:4px}.tag-container{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.tag{background:#e2e8f0;padding:4px 10px;border-radius:4px;font-size:0.85rem;display:flex;align-items:center;gap:5px}
+.tag button{background:none;border:none;color:#64748b;cursor:pointer;font-weight:bold}
+textarea{width:100%;height:150px;padding:12px;border:1px solid var(--border);border-radius:6px;font-size:0.95rem;margin-bottom:15px}
+.output-box{width:100%;min-height:150px;padding:12px;background:#fdfdfd;border:2px dashed var(--border);border-radius:6px;white-space:pre-wrap;margin-bottom:15px}
+.btn-group{display:flex;gap:10px;margin-bottom:20px}button{padding:10px 20px;border:none;border-radius:6px;cursor:pointer;font-weight:bold;transition:0.2s}
+.btn-run{background:var(--primary);color:white;flex:2}.btn-add{background:#64748b;color:white;padding:0 15px}
+.btn-copy{background:var(--success);color:white}.btn-sub{background:#e9ecef;color:var(--text)}button:hover{opacity:0.8}
+.counter{font-size:0.8rem;color:#64748b;text-align:right;margin-bottom:5px}
+</style>
+</head>
+<body>
+<div class="container">
+<header><h1>個人情報マスキングツール Pro</h1></header>
+<div class="config-section">
+<label class="config-title">1. 個別にマスキングする単語（人名・プロジェクト名等）</label>
+<div class="input-row"><input type="text" id="customInput" placeholder="例：山田太郎、極秘プロジェクトA"><button class="btn-add" onclick="addTag()">＋ 追加</button></div>
+<div id="tagList" class="tag-container"></div>
+</div>
+<div class="counter">入力文字数: <span id="inCnt">0</span></div>
+<textarea id="input" placeholder="ここに文章を入力してください..."></textarea>
+<div class="btn-group"><button class="btn-run" onclick="process()">マスキング実行</button><button class="btn-sub" onclick="resetAll()">リセット</button></div>
+<div class="counter">出力文字数: <span id="outCnt">0</span></div>
+<div id="output" class="output-box" title="変換結果"></div>
+<div class="btn-group"><button class="btn-copy" onclick="copyResult()">クリップボードにコピー</button><button class="btn-sub" onclick="downloadResult()">ファイル保存</button></div>
+</div>
+<script>
+let customTags = new Set();
+function addTag(){const v=document.getElementById('customInput').value.trim();if(v&&!customTags.has(v)){customTags.add(v);renderTags();document.getElementById('customInput').value='';}}
+function removeTag(v){customTags.delete(v);renderTags();}
+function renderTags(){const l=document.getElementById('tagList');l.innerHTML='';customTags.forEach(t=>{const e=document.createElement('span');e.className='tag';e.innerHTML=`${t} <button onclick="removeTag('${t}')">×</button>`;l.appendChild(e);});}
+document.getElementById('input').addEventListener('input',e=>{document.getElementById('inCnt').textContent=e.target.value.length;});
+function process(){
+let t=document.getElementById('input').value;if(!t)return;
+customTags.forEach(g=>{const e=g.replace(/[.*+?^${}()|[\]\s\\]/g,'\\$&');const r=new RegExp(e,'g');t=t.replace(r,'〇〇様');});
+t=t.replace(/[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*/g,'****@example.com');
+t=t.replace(/(\d{2,4}-\d{2,4}-\d{4})|(\d{10,11})/g,'***-****-****');
+t=t.replace(/(東京都|道庁|府庁|県庁|.{2,3}府|.{2,3}県)([^ \n\t\r、。，．]+)/g,'$1〇〇');
+let m=new Map(),i=0;
+t=t.replace(/([^\s、。]{2,15}(?:株式会社|有限会社|合同会社|（株）|\(株\))|(?:株式会社|有限会社|合同会社|（株）|\(株\))[^\s、。]{2,15})/g,x=>{if(!m.has(x))m.set(x,String.fromCharCode(65+(i++%26))+"社");return m.get(x);});
+const o=document.getElementById('output');o.textContent=t;document.getElementById('outCnt').textContent=t.length;
+}
+function copyResult(){const t=document.getElementById('output').textContent;if(t){navigator.clipboard.writeText(t);alert('コピーしました');}}
+function resetAll(){if(confirm('クリアしますか？')){document.getElementById('input').value='';document.getElementById('output').textContent='';customTags.clear();renderTags();}}
+function downloadResult(){const t=document.getElementById('output').textContent;if(!t)return;const b=new Blob([t],{type:'text/plain'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='masked.txt';a.click();}
+</script></body></html>
+  </script>
+  <script>
+    // --- 1. サンプルテキストデータ ---
+    const dataStore = {
+      minutes: `佐藤： お疲れ様、高橋君。忙しいところ悪いね。今日は例のキャリア面談ということで、今の仕事の状況と、今後のステップアップについて少し腹を割って話せればと思ってるんだ。最近はどうかな？
+高橋： お疲れ様です。そうですね……。担当している自動車部品メーカー向けの既存案件は安定しているんですけど、正直なところ、最近は「ただの御用聞き」になっている気がして。見積もりを出して、納期を調整して、たまにクレーム対応して……というサイクルの繰り返しで、営業としての成長が止まっているんじゃないかと不安になることがあります。
+佐藤： なるほど。既存顧客の維持も立派な仕事だけど、高橋君としてはもっと付加価値の高い提案をしたい、ということかな？
+高橋： はい。実は、今の製品ラインナップに加えて、最近トレンドになっている「環境配慮型の新素材部品」をもっと積極的に提案していきたいんです。でも、今の業務フローだと見積作成や納期の催促といった事務作業に追われていて、新しい技術資料を読み込んだり、顧客の設計部門に食い込んだりする時間が全然取れなくて。
+佐藤： 事務作業の負担か。それはチーム全体の課題でもあるな。あ、そういえばちょっと話逸れるけど、先週の展示会で使ったパネルの保管場所、ちゃんと倉庫のB棟に移しておいてくれた？ 邪魔だって資材部から小言言われちゃってさ（笑）。
+高橋： あ、すみません！ 戻し忘れてました。今日、外回りから帰ったらすぐにやっておきます。
+佐藤： 悪いね。で、本題に戻るけど、高橋君は「ソリューション型」の営業にシフトしたいってことだよね。単にモノを売るだけじゃなくて、顧客のカーボンニュートラル対応まで踏み込んだ提案をしたいと。
+高橋： おっしゃる通りです。ただ、今のメイン担当であるA社（大手メーカー）のボリュームが大きすぎて、どうしてもそこを優先せざるを得ないんです。このままだと5年後、10年後も同じことをしている気がして。
+佐藤： 分かった。高橋君の意欲はよく伝わったよ。だったら、次の下半期から少し役割を変えてみよう。今のA社の定型業務の一部を、新人の鈴木君に引き継ぐのはどうだろう？ 彼は彼で、実務を覚える段階だからちょうどいい。
+高橋： 鈴木君にですか。確かに、彼もだいぶ慣れてきましたし、私のサポートがあれば回せるかもしれません。
+佐藤： よし。じゃあ条件だ。2週間以内に「新素材部品のターゲット顧客リスト」と「初期提案用のプレゼン骨子」を作ってみてくれないか？ それを営業会議で通せれば、正式に高橋君を「新規事業開発兼務」としてアサインするよ。
+高橋： 本当ですか！ ありがとうございます。やらせてください。リストと骨子ですね。3月最初の金曜日までには仕上げます。
+佐藤： 期待してるよ。それと、その「環境配慮型」の提案をするには、少し専門的な知識も必要だよね。会社で推奨している「環境経営士」の資格とか、興味ある？ 取得費用は会社が持つ制度があるんだ。
+高橋： あ、それ気になっていました。試験は6月ですよね。今から勉強を始めれば間に合うと思います。ぜひ活用させてください。
+佐藤： よし、それは人事に確認して、後で申請マニュアルを共有するよ。あと、さっき言った「事務作業の効率化」についても、何かアイデアがあれば教えてほしい。高橋君が楽になれば、他のメンバーも助かるはずだから。
+高橋： そうですね……。例えば、見積依頼のフォーマットを共通化するだけでも、設計部門とのやり取りがかなりスムーズになる気がします。今まで電話やメールでバラバラだったので。
+佐藤： それは良い着眼点だ。その見積フォーマットのたたき台も、併せて考えておいてくれるかな？
+高橋： 承知しました。新規提案の準備、資格の勉強、それに見積フォーマットの改善ですね。
+佐藤： うん。あとは、新人の鈴木君の指導もよろしく頼むよ。彼、高橋君の営業スタイルを尊敬してるみたいだから。週に一度、移動中とかでもいいから、彼と状況確認する時間を取ってあげて。
+高橋： わかりました。鈴木君との定期的な打ち合わせもスケジュールに入れます。
+佐藤： よし。まとめると……まずは倉庫のパネル移動（笑）。それから2週間後の提案準備。資格の申請。見積フォーマットの検討。そして鈴木君のメンター。盛りだくさんだけど、大丈夫かな？
+高橋： はい！ 自分のやりたかった方向に進めるチャンスなので、全力でやります。
+佐藤： その意気だ。期待しているよ。あ、いけない、次の来客が来ちゃった。今日はここまで。
+高橋： ありがとうございました！ 失礼します。`,
+      
+      rules: `就業規則（サンプル）
+株式会社ネオ・クリエイト
+
+第1章 総則
+第1条（目的）
+本規則は、株式会社ネオ・クリエイト（以下「会社」という）の社員の就業に関する事項を定めるものである。
+
+第2章 勤務時間と休憩
+第2条（所定労働時間）
+労働時間は、1日8時間、1週間で40時間とする。
+コアタイムのない「フルフレックスタイム制」を導入する。ただし、標準労働時間帯は10:00〜19:00とする。
+
+第3条（ディープワーク・アワー：特徴的ルール1）
+毎週水曜日の13:00から16:00の間は「ディープワーク・アワー」とし、以下の行為を原則禁止とする。
+・会議の実施（社内・社外問わず）
+・チャットツール（Slack等）での即時レスポンスの要求
+・緊急時以外の電話連絡
+本制度の目的は、エンジニアおよびクリエイターの集中力を最大化することにある。
+
+第4条（パワーナップ制度：特徴的ルール2）
+社員は、午後のパフォーマンス維持のため、1日1回に限り**「18分間」**の仮眠を取ることができる。
+15分未満、または20分以上の仮眠は本制度の対象外とし、通常の休憩時間として処理しなければならない。
+
+第3章 生成AIの利用規約（特徴的ルール3）
+第5条（AI活用と人間による最終確認）
+業務における生成AI（ChatGPT, Claude, GitHub Copilot等）の使用を推奨する。
+ただし、外部クライアントへ納品するソースコードおよびドキュメントにAI生成物を含む場合、以下の「ダブル・チェック・プロトコル」を遵守しなければならない。
+ステップ1： 作成者以外の人間（1名以上）によるコードレビュー。
+ステップ2： セキュリティスキャンツールによる脆弱性診断。
+AIに対して、顧客の機密情報（個人情報、未公開の仕様書）を直接入力することは厳禁とする。
+
+第4章 福利厚生と特別休暇
+第6条（推し活休暇：特徴的ルール4）
+社員は、自身の「推し（応援対象）」のライブ、イベント、または記念日に合わせて、年間最大2日の有給休暇を「推し活休暇」として取得できる。
+申請時、対象となる「推し」の魅力を上長に30秒以内でプレゼンする必要があるが、上長は内容の如何に関わらず却下してはならない。
+
+第7条（リスキリング助成金）
+技術書およびビジネス書の購入費用は、月額15,000円を上限として会社が全額負担する。
+ただし、購入した書籍の内容を社内Wikiに300文字以上で要約・共有することが支給の条件となる。
+
+第5章 副業
+第8条（副業の自由と報告義務）
+会社は社員の副業を全面的に許可する。
+ただし、競合他社からの直接請負、および自社のリソース（PC、サーバー等）の私用は禁止する。
+副業の年間収益が100万円を超える見込みとなった場合、健康管理の観点から人事部への面談を申し出なければならない。`
+    };
+
+    // --- 2. ダウンロード機能の初期化 ---
+    // 隠しテンプレートから安全にHTMLを取得してBlobを作成
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        const rawHtml = document.getElementById('template-model-app').textContent.trim();
+        const blob = new Blob([rawHtml], { type: 'text/html' });
+        document.getElementById('downloadModelApp').href = URL.createObjectURL(blob);
+      } catch (e) {
+        console.error("Download setup failed:", e);
+      }
+    });
+
+    // --- 3. コピー機能 ---
+    function copyToClipboard(elementId, btnElement) {
+      const target = document.getElementById(elementId);
+      const text = target.innerText || target.value;
+      
+      navigator.clipboard.writeText(text).then(() => {
+        showSuccess(btnElement);
+      }).catch(() => {
+        // セキュリティ制限で失敗した場合のフォールバック
+        alert("コピーできませんでした。手動でコピーしてください。");
+        target.select();
+      });
+    }
+
+    function showSuccess(btn) {
+      const originalText = btn.innerText;
+      btn.innerText = "✅ コピー完了";
+      setTimeout(() => { btn.innerText = originalText; }, 2000);
+    }
+
+    // --- 4. サンプルテキスト読み込み ---
+    function loadSampleText(elementId, key) {
+      if(dataStore[key]) {
+        document.getElementById(elementId).innerText = dataStore[key];
+        const btn = document.querySelector(`button[onclick*="'${key}'"]`);
+        if(btn) showSuccess(btn);
+      }
+    }
+
+    // --- 5. プロンプト生成ロジック ---
+    function generatePrompt() {
+        const toolName = document.getElementById('toolName').value || "便利な業務ツール";
+        const inputData = document.getElementById('inputData').value || "テキストデータ";
+        const processData = document.getElementById('processData').value || "入力データを整形して出力する";
+        const theme = document.getElementById('designTheme').options[document.getElementById('designTheme').selectedIndex].text;
+        
+        let features = [];
+        if(document.getElementById('featCopy').checked) features.push("出力結果をワンクリックでクリップボードにコピーするボタン");
+        if(document.getElementById('featClear').checked) features.push("入力内容をクリアするリセットボタン");
+        if(document.getElementById('featDownload').checked) features.push("結果をテキストファイル(.txt)としてダウンロードするボタン");
+        if(document.getElementById('featCount').checked) features.push("リアルタイムの文字数カウント表示");
+
+        const featureList = features.map(f => `・${f}`).join("\n");
+
+        const prompt = `あなたは優秀なフロントエンドエンジニアです。
+私の業務効率化のために、以下の要件を満たす「シングルページHTMLアプリケーション」を作成してください。
+
+# 1. 作成するツール
+ツール名：${toolName}
+
+# 2. 技術的制約（最重要）
+・1つのHTMLファイルに「HTML」「CSS」「JavaScript」をすべて記述してください（単一ファイル完結）。
+・外部サーバーへのデータ通信は一切行わないでください（セキュリティのため完全ローカル処理）。
+・外部ライブラリ（CDNなど）は使用せず、バニラJSで記述してください。
+
+# 3. 機能要件
+[入力エリア]
+・ユーザーが入力するもの：
+${inputData}
+
+[処理ロジック]
+・実行ボタンが押されたら以下の処理を行ってください：
+${processData}
+
+[出力エリア]
+・処理結果を表示するエリア（読み取り専用）。
+・以下の機能を追加してください：
+${featureList}
+
+# 4. デザイン要件
+・テーマ：${theme}
+・プロフェッショナルな業務ツールとして、見やすく、余白を適切にとったモダンなUIにしてください。
+・レスポンシブ対応（スマホでも崩れないように）してください。
+
+# 5. 出力形式
+・解説は最小限にし、すぐにコピーして使える「完成されたHTMLコード」をコードブロックで出力してください。`;
+
+        document.getElementById('finalPrompt').value = prompt;
+    }
+  </script>
+</body>
+</html>

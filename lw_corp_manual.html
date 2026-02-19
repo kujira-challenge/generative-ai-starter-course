@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生成AI活用研修 - 画像生成 実践ブートキャンプ</title>
+  <style>
+    :root {
+      /* カラーテーマ（BtoB向け・信頼感のある青ベース） */
+      --primary-color: #0052cc; /* ビジネスブルー */
+      --secondary-color: #2c3e50; /* ダークネイビー */
+      --accent-color: #e6f0ff; /* 背景用薄青 */
+      --text-color: #333333;
+      --bg-color: #f4f6f8;
+      --card-bg: #ffffff;
+      
+      /* ボタン色 */
+      --btn-primary-bg: #0052cc;
+      --btn-primary-hover: #003d99;
+      --btn-success-bg: #27ae60;
+      --btn-success-hover: #219150;
+      
+      --warning-bg: #fff3cd;
+      --warning-text: #856404;
+      --info-bg: #e1f5fe;
+      --info-text: #0277bd;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    /* ヘッダー */
+    .header {
+      background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .header h1 { font-size: 2rem; margin-bottom: 10px; font-weight: 700; }
+
+    .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+
+    /* イントロダクション */
+    .intro-box {
+      background: white;
+      border-left: 5px solid var(--primary-color);
+      padding: 25px;
+      border-radius: 8px;
+      margin-bottom: 40px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+
+    /* セクション見出し */
+    .section-title {
+      font-size: 1.5rem;
+      color: var(--secondary-color);
+      margin: 60px 0 20px 0;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #dde2e6;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* カードデザイン */
+    .card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      border: 1px solid #e1e4e8;
+    }
+    .card h3 {
+      font-size: 1.2rem;
+      color: var(--primary-color);
+      margin-bottom: 15px;
+      border-left: 4px solid var(--primary-color);
+      padding-left: 10px;
+    }
+
+    /* プロンプト表示エリア */
+    .prompt-area {
+      background-color: #f8f9fa;
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      font-family: "Consolas", "Monaco", monospace;
+      font-size: 0.9rem;
+      color: #444;
+      white-space: pre-wrap;
+      max-height: 350px;
+      overflow-y: auto;
+      margin-bottom: 15px;
+    }
+
+    /* ボタン */
+    .btn {
+      display: inline-block; padding: 12px 24px; border: none; border-radius: 6px;
+      font-size: 1rem; font-weight: bold; cursor: pointer; text-decoration: none; text-align: center;
+      transition: background 0.3s;
+    }
+    .btn-full { width: 100%; }
+    .btn-primary { background-color: var(--btn-primary-bg); color: white; }
+    .btn-primary:hover { background-color: var(--btn-primary-hover); }
+    .btn-success { background-color: var(--btn-success-bg); color: white; }
+    .btn-success:hover { background-color: var(--btn-success-hover); }
+
+    /* ボックススタイル */
+    .tip-box {
+      background-color: var(--info-bg);
+      color: var(--info-text);
+      padding: 15px;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      font-size: 0.95rem;
+      border-left: 4px solid #0288d1;
+    }
+    .warning-box {
+      background-color: var(--warning-bg);
+      color: var(--warning-text);
+      padding: 15px;
+      border-radius: 6px;
+      margin-top: 15px;
+      font-size: 0.95rem;
+      border-left: 4px solid #ffc107;
+    }
+
+    ul.check-list { list-style: none; padding-left: 0; margin-bottom: 20px; }
+    ul.check-list li { position: relative; padding-left: 25px; margin-bottom: 10px; }
+    ul.check-list li::before { content: "✅"; position: absolute; left: 0; top: 0; }
+
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <h1>生成AI活用研修 - 画像生成ブートキャンプ</h1>
+    <p>BtoBマニュアル向け：安全で高品質な図解・イラストの作り方</p>
+  </header>
+
+  <div class="container">
+
+    <div class="intro-box">
+      <h2>🎨 本日のゴール：統一感のあるマニュアル素材の自作</h2>
+      <p>Gemini（画像生成AI）を活用して、マニュアルに挿入する「構造図」や「イメージイラスト」を生成します。属人化を防ぎ、誰が作っても**「[会社名]品質」**のトーン＆マナーを維持する手法を学びます。</p>
+    </div>
+
+    <h2 class="section-title">💡 Section 1: 画像生成の基本とコツ</h2>
+
+    <div class="card">
+      <h3>BtoBマニュアル用 画像生成 4つの鉄則</h3>
+      <ul class="check-list">
+        <li><strong>AI語（文字崩れ）は「上書き」で対応する：</strong><br>
+          AIは日本語の描画が完璧ではありません。図形が綺麗に出力されたら、変な文字は無理にAIで直そうとせず、PowerPoint上で「白い四角で隠して、テキストボックスで打ち直す」のが最も効率的です。</li>
+        <li><strong>スタイル（画風）を固定する言葉を使う：</strong><br>
+          プロンプトには必ず <code>フラットデザイン、ミニマル、白背景</code> などのスタイル指定を入れます。</li>
+        <li><strong>ブランドカラーを指定する：</strong><br>
+          <code>メインカラーは白とダークグレー。アクセントに濃い青（#0052CC）を使って</code> と指定することで、配色のバラつきを防ぎます。</li>
+        <li><strong>「一般的なフォント」を指定する：</strong><br>
+          特定のフォント（著作権リスク）に似るのを防ぐため、文字を出力させる場合は <code>一般的なゴシック体（サンセリフ体）を使用し、装飾はしないで</code> と指示します。</li>
+      </ul>
+      
+      <div class="warning-box">
+        <strong>⚠️ 権利とセキュリティに関する注意点</strong><br>
+        生成した画像内のテキストは、既存の有料フォントに類似するリスクを避けるため、原則として自社の標準フォント（メイリオやNoto Sansなど）で打ち直して使用してください。また、参照画像として他社の著作物（Webで拾ったイラスト等）をアップロードすることは禁止です。
+      </div>
+    </div>
+
+
+    <h2 class="section-title">🤖 Section 2: 専用AI（Gems）のセットアップ</h2>
+
+    <div class="card" style="border: 2px solid var(--secondary-color);">
+      <h3 style="color: var(--secondary-color); border-left-color: var(--secondary-color);">🔰 準備：Gem（自分専用ボット）の作り方</h3>
+      <p style="margin-bottom: 15px;">毎回長文のルールを入力する手間を省くため、Geminiの「Gems」機能に[会社名]専用のルールを記憶させます。</p>
+      <ol style="padding-left: 20px; line-height: 1.8;">
+        <li>Geminiの画面左側から「Gems」＞「新しいGemを作成」をクリック。</li>
+        <li>名前に <strong>[貴社名略称]_Chart_Maker</strong> などを入力。</li>
+        <li>以下のテキストボックスの内容を「手順（Instructions）」欄にコピペして保存。</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h3>📊 Gem 1：[貴社名略称] 図解メーカー (Chart Maker)</h3>
+      <p>ベン図、氷山モデル、比較表、プロセス図などの「構造」を可視化するためのGemです。</p>
+      
+      <div class="prompt-area" id="gem_instruction_1">あなたは株式会社[会社名]の研修資料作成に特化した、プロフェッショナルなテクニカルイラストレーターです。
+以下の厳格なガイドラインに従い、BtoBマニュアル用の「構造図」「フレームワーク図」を生成してください。
+
+## 1. デザインルール (Strict Guidelines)
+* **スタイル:** フラットデザイン、ベクターアート調。立体的すぎない、清潔感のある「Corporate Memphis」スタイル（ただしミニマルに）。
+* **背景色:** 完全な白 (#FFFFFF)。スライドに貼り付けやすくするため。
+* **メインカラー:** ダークグレー (#333333)。線や文字に使用。
+* **アクセントカラー:** 信頼を表す「濃い青 (#0052CC)」。最も強調したい部分（ベン図の重なり、矢印、重要なステップ）のみに使用する。
+* **禁止事項:** 手書き風、クレヨン画風、虹色やネオンカラーの使用。
+
+## 2. 図解の処理方針
+* **文字の扱い:**
+    * 日本語テキストの生成を試みてください。
+    * 複雑で崩れる可能性がある場合は、あえて「英語の見出し（WILL, CAN, MUST等）」にするか、後からPowerPointで文字を入れるための「空白の枠（ラベルボックス）」を描画してください。
+* **構図:** 論理的で整頓された配置（シンメトリー、整列）を心がけてください。
+
+## 3. 生成の目的
+* 管理職および部下向けの「キャリア面談マニュアル」に使用します。
+* 「WILL/CAN/MUST」「氷山モデル」「ステップアップ」などの概念を可視化します。</div>
+      <button class="btn btn-success btn-full" onclick="copyToClipboard('gem_instruction_1', this)">📋 システム指示をコピーしてGemを作成</button>
+      
+      <h4 style="margin-top: 25px; margin-bottom: 10px; color: #555;">💡 このGemで使うプロンプト例（実行用）</h4>
+      <div class="prompt-area" id="gem_prompt_1" style="max-height: 120px;">「WILL」「CAN」「MUST」というラベルが付いた3つの円が重なるベン図を描いてください。3つが重なる中心部分をアクセントカラーの青色で塗りつぶし、そこに「Growth」と書いてください。背景は白で、シンプルに。</div>
+      <button class="btn btn-primary" onclick="copyToClipboard('gem_prompt_1', this)">📋 プロンプト例をコピー</button>
+    </div>
+
+    <div class="card">
+      <h3>👥 Gem 2：[貴社名略称] シーン描画 (Scene Weaver)</h3>
+      <p>「伴走する」「対話する」「成長する」といった抽象的な概念や場面をイラスト化するGemです。</p>
+      
+      <div class="prompt-area" id="gem_instruction_2">あなたは株式会社[会社名]の研修資料作成に特化した、ビジネスシーン専門のイラストレーターです。
+以下のガイドラインに従い、マニュアルの文脈を補完する「シーン」「抽象イメージ」を生成してください。
+
+## 1. デザインルール (Strict Guidelines)
+* **スタイル:** フラットデザイン、ラインアートと塗りの中間。抽象的でクセのない人物像。
+* **背景色:** 完全な白 (#FFFFFF)。
+* **カラーパレット:**
+    * ベース: 白、ライトグレー、ダークグレー。
+    * **アクセント: 濃い青 (#0052CC)**。人物の服の一部、道筋、光、重要なオブジェクトに使用して視線を誘導する。
+* **人物描写:** 表情は描かない（または非常にシンプルに）。特定の個人を特定できない抽象的なビジネスパーソン。
+
+## 2. 表現のトーン
+* **キーワード:** 「信頼」「伴走」「成長」「対話」「自律」。
+* **禁止事項:**
+    * 過剰に漫画っぽい表現（汗、漫符）。
+    * リアルすぎる写真のような描写。
+    * 上下関係を強調しすぎる構図（上司が偉そうにしている等）。あくまで「パートナーシップ」を描く。
+
+## 3. 生成の目的
+* 「上司が部下の横に並んで走る（伴走）」や「階段を登る部下を支える」といった、マネジメントの概念をイラスト化します。</div>
+      <button class="btn btn-success btn-full" onclick="copyToClipboard('gem_instruction_2', this)">📋 システム指示をコピーしてGemを作成</button>
+
+      <h4 style="margin-top: 25px; margin-bottom: 10px; color: #555;">💡 このGemで使うプロンプト例（実行用）</h4>
+      <div class="prompt-area" id="gem_prompt_2" style="max-height: 120px;">上司と部下が横に並んで、未来に向かって歩いている後ろ姿を描いてください。青いラインで道が示されています。対等な関係性で、信頼感のあるビジネスイラストにしてください。背景は白。</div>
+      <button class="btn btn-primary" onclick="copyToClipboard('gem_prompt_2', this)">📋 プロンプト例をコピー</button>
+    </div>
+
+  </div>
+
+  <footer style="text-align: center; padding: 40px; color: #888; font-size: 0.9rem;">
+    <p>© 2026 [会社名] Generative AI Training - Image Generation Resources</p>
+  </footer>
+
+  <script>
+    // コピー機能
+    function copyToClipboard(elementId, btnElement) {
+      const target = document.getElementById(elementId);
+      const text = target.innerText || target.value;
+      
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = btnElement.innerText;
+        btnElement.innerText = "✅ コピー完了！";
+        btnElement.style.backgroundColor = "#1e8449"; // 成功時の色
+        
+        setTimeout(() => { 
+          btnElement.innerText = originalText; 
+          btnElement.style.backgroundColor = ""; // 元の色に戻す
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed:', err);
+        alert("コピーに失敗しました。お手数ですが手動でコピーしてください。");
+      });
+    }
+  </script>
+</body>
+</html>

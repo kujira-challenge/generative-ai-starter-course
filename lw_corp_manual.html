@@ -24,6 +24,8 @@
       --warning-text: #856404;
       --info-bg: #e1f5fe;
       --info-text: #0277bd;
+      --important-bg: #fdf2e9;
+      --important-text: #d35400;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -132,6 +134,30 @@
       font-size: 0.95rem;
       border-left: 4px solid #ffc107;
     }
+    .important-box {
+      background-color: var(--important-bg);
+      color: var(--important-text);
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+      font-size: 0.95rem;
+      border-left: 5px solid #d35400;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    .important-box h4 {
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .important-box ul {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+    .important-box li {
+      margin-bottom: 8px;
+    }
 
     ul.check-list { list-style: none; padding-left: 0; margin-bottom: 20px; }
     ul.check-list li { position: relative; padding-left: 25px; margin-bottom: 10px; }
@@ -155,6 +181,14 @@
 
     <h2 class="section-title">💡 Section 1: 画像生成の基本とコツ</h2>
 
+    <div class="important-box">
+      <h4>⚠️ 【重要】生成モデル（Pro / 高速モード）の賢い使い分け</h4>
+      <p>画像生成を行う際は、極力<strong>「Pro」モデル</strong>を使用してください。Pro版は文字化けがしにくく、指示の意図を正確に汲み取った高品質な画像が「一発」で出やすいため、手戻りが減り業務効率が劇的に向上します。</p>
+      <ul>
+        <li><strong>利用枠の節約術：</strong> どうでもいい会話や簡単な壁打ちには、Proではなく「高速モード（標準モデル）」を使ってProの利用枠を温存しましょう。</li>
+        <li><strong>制限オーバー時の対策：</strong> Pro版には1日の利用制限があります。万一オーバーした場合は、「チーム内で作業を分担する」「翌日に日を分ける」、または「文字を含まない純粋なイラスト生成には思考モードを活用する」など、状況に合わせて工夫してください。</li>
+      </ul>
+    </div>
     <div class="card">
       <h3>BtoBマニュアル用 画像生成 4つの鉄則</h3>
       <ul class="check-list">
